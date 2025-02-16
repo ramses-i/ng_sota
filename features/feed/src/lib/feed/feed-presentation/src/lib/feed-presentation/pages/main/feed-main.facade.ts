@@ -1,8 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { LoginError } from '@ng-sota/login-domain';
 import { match } from 'fp-ts/Either';
 import {
-  CreatePostUseCase,
+  CreatePostUseCase, FeedError,
   GetPostsUseCase,
   Posts,
 } from '@ng-sota/feed-domain';
@@ -25,7 +24,7 @@ export class FeedMainFacade {
     const result = await this.getPosts.execute();
 
     match(
-      (error: LoginError) => this.errorMessage.set(error.message),
+      (error: FeedError) => this.errorMessage.set(error.message),
       (posts: Posts) => this.posts.set(posts)
     )(result);
 
@@ -39,7 +38,7 @@ export class FeedMainFacade {
     const result = await this.createPost.execute(content);
 
     match(
-      (error: LoginError) => this.errorMessage.set(error.message),
+      (error: FeedError) => this.errorMessage.set(error.message),
       (isCreated: boolean) => {
         if (isCreated) {
           console.log('Successfully published');
