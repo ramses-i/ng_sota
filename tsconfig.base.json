@@ -1,0 +1,53 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2022",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@ng-sota/core": ["core/src/index.ts"],
+      "@ng-sota/feed": ["features/feed/src/index.ts"],
+      "@ng-sota/feed-data": [
+        "features/feed/src/lib/feed/feed-data/src/index.ts"
+      ],
+      "@ng-sota/feed-domain": [
+        "features/feed/src/lib/feed/feed-domain/src/index.ts"
+      ],
+      "@ng-sota/feed-presentation": [
+        "features/feed/src/lib/feed/feed-presentation/src/index.ts"
+      ],
+      "@ng-sota/login": ["features/login/src/index.ts"],
+      "@ng-sota/login-data": [
+        "features/login/src/lib/login/login-data/src/index.ts"
+      ],
+      "@ng-sota/login-domain": [
+        "features/login/src/lib/login/login-domain/src/index.ts"
+      ],
+      "@ng-sota/login-presentation": [
+        "features/login/src/lib/login/login-presentation/src/index.ts"
+      ],
+      "@ng-sota/profile": ["features/profile/src/index.ts"],
+      "@ng-sota/profile-data": [
+        "features/profile/src/lib/profile/profile-data/src/index.ts"
+      ],
+      "@ng-sota/profile-domain": [
+        "features/profile/src/lib/profile/profile-domain/src/index.ts"
+      ],
+      "@ng-sota/profile-presentation": [
+        "features/profile/src/lib/profile/profile-presentation/src/index.ts"
+      ],
+      "@ng-sota/ui": ["shared/ui/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}

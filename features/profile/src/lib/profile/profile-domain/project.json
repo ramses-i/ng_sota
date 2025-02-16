@@ -1,0 +1,23 @@
+{
+  "name": "profile-domain",
+  "$schema": "../../../../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "features/profile/src/lib/profile/profile-domain/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [
+    "scope:profile",
+    "layer:domain"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "features/profile/src/lib/profile/profile-domain/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

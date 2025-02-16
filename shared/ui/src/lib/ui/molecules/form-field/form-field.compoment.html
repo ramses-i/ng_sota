@@ -1,0 +1,10 @@
+<lib-input-field
+  [label]="label"
+  [id]="id"
+  [type]="type"
+  [placeholder]="placeholder"
+  [control]="control"
+></lib-input-field>
+<p *ngIf="controlInvalid" class="text-red-500">
+  {{ error }}
+</p>
