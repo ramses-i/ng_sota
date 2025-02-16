@@ -2,22 +2,13 @@ import { Injectable, signal } from '@angular/core';
 import { LoginError, LoginUseCase } from '@ng-sota/login-domain';
 import { match } from 'fp-ts/Either';
 import { Router } from '@angular/router';
-import { AuthService } from '@ng-sota/core';
 
 @Injectable({ providedIn: 'root' })
 export class LoginMainFacade {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
 
-  constructor(
-    private loginUseCase: LoginUseCase,
-    private router: Router,
-    private authService: AuthService
-  ) {
-    if (this.authService.isAuthenticated()) {
-      this.router.navigate(['/feed']);
-    }
-  }
+  constructor(private loginUseCase: LoginUseCase, private router: Router) {}
 
   async login(email: string, password: string) {
     this.isLoading.set(true);

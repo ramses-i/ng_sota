@@ -46,6 +46,7 @@
       "@ng-sota/profile-presentation": [
         "features/profile/src/lib/profile/profile-presentation/src/index.ts"
       ],
+      "@ng-sota/supabase": ["libs/supabase/src/index.ts"],
       "@ng-sota/ui": ["shared/ui/src/index.ts"]
     }
   },

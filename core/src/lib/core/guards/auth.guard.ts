@@ -8,7 +8,7 @@ import {
 
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { AuthService } from '../auth/auth.service';
+import { AuthService } from '@ng-sota/supabase';
 
 @Injectable({
   providedIn: 'root',

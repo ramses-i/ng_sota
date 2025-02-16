@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { supabase } from '../config/supabase.config';
+import { supabase } from './supabase.config';
 
 @Injectable({
   providedIn: 'root',

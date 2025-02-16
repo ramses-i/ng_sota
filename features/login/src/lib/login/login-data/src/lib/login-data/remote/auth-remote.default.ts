@@ -2,7 +2,7 @@ import { AuthRemoteDataSource } from '../auth-remote.datasource';
 import { Injectable } from '@angular/core';
 import { LoginError } from '@ng-sota/login-domain';
 import { Either, left, right } from 'fp-ts/Either';
-import { AuthService } from '@ng-sota/core';
+import { AuthService } from '@ng-sota/supabase';
 
 @Injectable({ providedIn: 'root' })
 export class AuthRemoteDataSourceDefault extends AuthRemoteDataSource {
