@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from './supabase.config';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,7 +9,7 @@ import { supabase } from './supabase.config';
 export class PostsService {
   private supabase: SupabaseClient;
 
-  constructor() {
+  constructor(private authService: AuthService) {
     this.supabase = supabase;
   }
 
@@ -20,14 +21,12 @@ export class PostsService {
     return this.supabase.from('posts').select('*').eq('id', id).single();
   }
 
-  async createPost(title: string, content: string, userId: string) {
+  async createPost(content: string) {
+    const title = 'Title';
+    const userId = this.authService.currentUserId();
     return this.supabase
       .from('posts')
       .insert([{ title, content, user_id: userId }]);
-  }
-
-  async updatePost(id: string, title: string, content: string) {
-    return this.supabase.from('posts').update({ title, content }).eq('id', id);
   }
 
   async deletePost(id: string) {

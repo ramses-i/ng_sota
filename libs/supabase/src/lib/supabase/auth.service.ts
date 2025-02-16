@@ -38,6 +38,10 @@ export class AuthService {
     return !!this.userSubject.value;
   }
 
+  currentUserId(): string {
+    return this.userSubject.value.id;
+  }
+
   checkSession(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
       supabase.auth
