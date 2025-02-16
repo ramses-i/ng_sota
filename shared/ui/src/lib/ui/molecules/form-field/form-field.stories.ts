@@ -11,10 +11,10 @@ const Template: StoryFn<FormFieldComponent> = (args) => ({
   component: FormFieldComponent,
   props: {
     ...args,
-    control: new FormControl(''), // Simulamos el FormControl en Storybook
+    control: new FormControl(''),
   },
   moduleMetadata: {
-    imports: [ReactiveFormsModule], // Aseguramos que Angular maneje los formularios
+    imports: [ReactiveFormsModule],
   },
 });
 
