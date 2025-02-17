@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
-import { FeedMainFacade } from './pages/main/feed-main.facade';
 
 @Component({
   selector: 'lib-feed-presentation',
@@ -9,8 +8,4 @@ import { FeedMainFacade } from './pages/main/feed-main.facade';
   templateUrl: './feed-presentation.component.html',
   styleUrl: './feed-presentation.component.css',
 })
-export class FeedPresentationComponent {
-  constructor(private controller: FeedMainFacade) {
-    this.controller.getFeed();
-  }
-}
+export class FeedPresentationComponent {}

@@ -17,8 +17,13 @@ export class PostsService {
     return this.supabase.from('posts').select('*');
   }
 
-  async getPostById(id: string) {
-    return this.supabase.from('posts').select('*').eq('id', id).single();
+  async getPostsByUser(userId: string) {
+    const currentUser = this.authService.currentUserId();
+    if (userId.length == 0) {
+      return this.supabase.from('posts').select('*').eq('id', currentUser);
+    } else {
+      return this.supabase.from('posts').select('*').eq('id', userId);
+    }
   }
 
   async createPost(content: string) {

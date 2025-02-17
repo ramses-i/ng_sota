@@ -3,6 +3,9 @@ import { FeedRemoteDataSource } from '../feed-remote.default';
 import { Either, left, right } from 'fp-ts/Either';
 import { FeedError, Posts } from '@ng-sota/feed-domain';
 import { PostsService } from '@ng-sota/supabase';
+import { PostgrestResponse } from '@supabase/supabase-js';
+import { PostResponse } from './model/response/post.response';
+import { PostsResponseToDomain } from './mapper/post.mapper';
 
 @Injectable({ providedIn: 'root' })
 export class FeedRemoteDataSourceDefault extends FeedRemoteDataSource {
@@ -12,11 +15,15 @@ export class FeedRemoteDataSourceDefault extends FeedRemoteDataSource {
 
   override async getPosts(): Promise<Either<Error, Posts>> {
     try {
-      const result = await this.postsService.getPosts();
-      console.log(result);
-      return right({
-        items: [],
-      });
+      const result: PostgrestResponse<PostResponse> =
+        await this.postsService.getPosts();
+      console.log('Raw Supabase Response: ', result);
+
+      if (result.error) {
+        return left(new FeedError(result.error.message));
+      }
+
+      return right(PostsResponseToDomain(result.data));
     } catch (error) {
       return left(new FeedError('getPosts Call Error 1'));
     }
@@ -26,7 +33,7 @@ export class FeedRemoteDataSourceDefault extends FeedRemoteDataSource {
     userId: string
   ): Promise<Either<Error, Posts>> {
     try {
-      const result = await this.postsService.getPostById(userId);
+      const result = await this.postsService.getPostsByUser(userId);
       console.log(result);
       return right({
         items: [],

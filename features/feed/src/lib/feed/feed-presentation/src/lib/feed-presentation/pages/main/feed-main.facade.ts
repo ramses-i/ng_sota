@@ -1,7 +1,8 @@
 import { Injectable, signal } from '@angular/core';
 import { match } from 'fp-ts/Either';
 import {
-  CreatePostUseCase, FeedError,
+  CreatePostUseCase,
+  FeedError,
   GetPostsUseCase,
   Posts,
 } from '@ng-sota/feed-domain';
@@ -10,7 +11,7 @@ import {
 export class FeedMainFacade {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
-  posts = signal<Posts | null>(null);
+  posts = signal<Posts>({ items: [] });
 
   constructor(
     private getPosts: GetPostsUseCase,
