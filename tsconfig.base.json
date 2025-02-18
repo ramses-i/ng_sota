@@ -36,6 +36,7 @@
       "@ng-sota/login-presentation": [
         "features/login/src/lib/login/login-presentation/src/index.ts"
       ],
+      "@ng-sota/posts": ["libs/posts/src/index.ts"],
       "@ng-sota/profile": ["features/profile/src/index.ts"],
       "@ng-sota/profile-data": [
         "features/profile/src/lib/profile/profile-data/src/index.ts"

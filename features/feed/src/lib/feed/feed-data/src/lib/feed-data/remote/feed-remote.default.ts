@@ -15,8 +15,7 @@ export class FeedRemoteDataSourceDefault extends FeedRemoteDataSource {
 
   override async getPosts(): Promise<Either<Error, Posts>> {
     try {
-      const result: PostgrestResponse<PostResponse> =
-        await this.postsService.getPosts();
+      const result: PostgrestResponse<PostResponse> = await this.postsService.getPosts();
       console.log('Raw Supabase Response: ', result);
 
       if (result.error) {

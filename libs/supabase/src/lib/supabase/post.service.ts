@@ -14,16 +14,15 @@ export class PostsService {
   }
 
   async getPosts() {
-    return this.supabase.from('posts').select('*');
+    return this.supabase.from('posts_with_users').select('*');
   }
 
   async getPostsByUser(userId: string) {
-    const currentUser = this.authService.currentUserId();
-    if (userId.length == 0) {
-      return this.supabase.from('posts').select('*').eq('id', currentUser);
-    } else {
-      return this.supabase.from('posts').select('*').eq('id', userId);
-    }
+    const user = userId.length == 0 ? this.authService.currentUserId() : userId;
+    return this.supabase
+      .from('posts')
+      .select('*, auth.users(email)')
+      .eq('user_id', user);
   }
 
   async createPost(content: string) {
