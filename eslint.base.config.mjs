@@ -23,6 +23,7 @@ export default [
             {
               sourceTag: 'layer:presentation',
               onlyDependOnLibsWithTags: [
+                'layer:presentation',
                 'layer:domain',
                 'scope:shared',
                 'scope:core',

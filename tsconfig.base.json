@@ -17,12 +17,6 @@
     "paths": {
       "@ng-sota/core": ["core/src/index.ts"],
       "@ng-sota/feed": ["features/feed/src/index.ts"],
-      "@ng-sota/feed-data": [
-        "features/feed/src/lib/feed/feed-data/src/index.ts"
-      ],
-      "@ng-sota/feed-domain": [
-        "features/feed/src/lib/feed/feed-domain/src/index.ts"
-      ],
       "@ng-sota/feed-presentation": [
         "features/feed/src/lib/feed/feed-presentation/src/index.ts"
       ],
@@ -39,6 +33,9 @@
       "@ng-sota/posts": ["libs/posts/src/index.ts"],
       "@ng-sota/posts-api": ["libs/posts/posts-api/src/index.ts"],
       "@ng-sota/posts-impl": ["libs/posts/posts-impl/src/index.ts"],
+      "@ng-sota/posts-presentation": [
+        "libs/posts/posts-presentation/src/index.ts"
+      ],
       "@ng-sota/profile": ["features/profile/src/index.ts"],
       "@ng-sota/profile-data": [
         "features/profile/src/lib/profile/profile-data/src/index.ts"

@@ -4,10 +4,10 @@ import { Posts } from '@ng-sota/ui';
 import {
   CreatePostUseCase,
   DPosts,
-  DPostsToPosts,
   GetPostsUseCase,
   PostsError,
 } from '@ng-sota/posts-api';
+import { DPostsToPosts } from '@ng-sota/posts-presentation';
 
 @Injectable({ providedIn: 'root' })
 export class FeedMainFacade {
