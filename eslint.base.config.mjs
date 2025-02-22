@@ -26,6 +26,7 @@ export default [
                 'layer:domain',
                 'scope:shared',
                 'scope:core',
+                'scope:api',
               ],
             },
             {

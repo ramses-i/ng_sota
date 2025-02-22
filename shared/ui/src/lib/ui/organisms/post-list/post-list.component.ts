@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { PostComponent } from '../../molecules/post/post.component';
-import { Post, Posts } from '@ng-sota/feed-domain';
+import { Post, Posts } from '../../model/posts.model';
 
 @Component({
   imports: [PostComponent],
@@ -12,8 +12,8 @@ import { Post, Posts } from '@ng-sota/feed-domain';
           } @else {
               @for (post of publishedPosts; track post.id) {
                   <lib-post
-                          username="{{ post.userId }}"
-                          date="{{ post.createdAt }}"
+                          username="{{ post.user.name }}"
+                          date="{{ post.publishDate }}"
                           content="{{ post.content }}"
                   ></lib-post>
               }

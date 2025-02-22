@@ -5,7 +5,7 @@ import { PostgrestResponse } from '@supabase/supabase-js';
 import { PostResponse } from './model/response/post.response';
 import { PostsResponseToDomain } from './mapper/post.mapper';
 import { PostsRemoteDataSource } from '../posts-remote.datasource';
-import { PostsError } from '../../domain/errors/posts.error';
+import { PostsError } from '../../../../../../posts-api/src/lib/posts-api/errors/posts.error';
 import {DPosts} from "@ng-sota/posts-api";
 
 @Injectable({ providedIn: 'root' })

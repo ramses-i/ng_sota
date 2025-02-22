@@ -1,5 +1,5 @@
 import { Injectable, signal } from '@angular/core';
-import { Posts } from '@ng-sota/feed-domain';
+import { Posts } from '@ng-sota/ui';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileMainFacade {

@@ -1,11 +1,13 @@
 import { Injectable, signal } from '@angular/core';
 import { match } from 'fp-ts/Either';
+import { Posts } from '@ng-sota/ui';
 import {
   CreatePostUseCase,
-  FeedError,
+  DPosts,
+  DPostsToPosts,
   GetPostsUseCase,
-  Posts,
-} from '@ng-sota/feed-domain';
+  PostsError,
+} from '@ng-sota/posts-api';
 
 @Injectable({ providedIn: 'root' })
 export class FeedMainFacade {
@@ -25,8 +27,8 @@ export class FeedMainFacade {
     const result = await this.getPosts.execute();
 
     match(
-      (error: FeedError) => this.errorMessage.set(error.message),
-      (posts: Posts) => this.posts.set(posts)
+      (error: PostsError) => this.errorMessage.set(error.message),
+      (posts: DPosts) => this.posts.set(DPostsToPosts(posts))
     )(result);
 
     this.isLoading.set(false);
@@ -39,7 +41,7 @@ export class FeedMainFacade {
     const result = await this.createPost.execute(content);
 
     match(
-      (error: FeedError) => this.errorMessage.set(error.message),
+      (error: PostsError) => this.errorMessage.set(error.message),
       (isCreated: boolean) => {
         if (isCreated) {
           console.log('Successfully published');

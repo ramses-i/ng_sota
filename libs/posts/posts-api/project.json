@@ -4,7 +4,9 @@
   "sourceRoot": "libs/posts/posts-api/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": [
+    "scope:api"
+  ],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

@@ -15,3 +15,5 @@ export * from './lib/ui/organisms/post-form/post-form.component';
 export * from './lib/ui/organisms/post-list/post-list.component';
 // Templates
 export * from './lib/ui/templates/feed-tpl/feed-tpl.component';
+// Models
+export * from './lib/ui/model/posts.model';
