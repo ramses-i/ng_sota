@@ -10,66 +10,34 @@
     "importHelpers": true,
     "target": "es2022",
     "module": "esnext",
-    "lib": [
-      "es2020",
-      "dom"
-    ],
+    "lib": ["es2020", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@ng-sota/auth": [
-        "libs/auth/src/index.ts"
-      ],
-      "@ng-sota/auth-api": [
-        "libs/auth/auth-api/src/index.ts"
-      ],
-      "@ng-sota/auth-impl": [
-        "libs/auth/auth-impl/src/index.ts"
-      ],
-      "@ng-sota/posts": [
-        "libs/posts/src/index.ts"
-      ],
-      "@ng-sota/posts-api": [
-        "libs/posts/posts-api/src/index.ts"
-      ],
-      "@ng-sota/posts-impl": [
-        "libs/posts/posts-impl/src/index.ts"
-      ],
-      "@ng-sota/posts-presentation": [
-        "libs/posts/posts-presentation/src/index.ts"
-      ],
-      "@ng-sota/core": [
-        "core/src/index.ts"
-      ],
-      "@ng-sota/ui": [
-        "shared/ui/src/index.ts"
-      ],
-      "@ng-sota/feed": [
-        "features/feed/src/index.ts"
-      ],
+      "@ng-sota/auth": ["libs/auth/src/index.ts"],
+      "@ng-sota/auth-api": ["libs/auth/auth-api/src/index.ts"],
+      "@ng-sota/auth-impl": ["libs/auth/auth-impl/src/index.ts"],
+      "@ng-sota/core": ["core/src/index.ts"],
+      "@ng-sota/feed": ["features/feed/src/index.ts"],
       "@ng-sota/feed-presentation": [
         "features/feed/feed-presentation/src/index.ts"
       ],
-      "@ng-sota/login": [
-        "features/login/src/index.ts"
-      ],
+      "@ng-sota/login": ["features/login/src/index.ts"],
       "@ng-sota/login-presentation": [
         "features/login/login-presentation/src/index.ts"
       ],
-      "@ng-sota/profile": [
-        "features/profile/src/index.ts"
-      ],
+      "@ng-sota/posts": ["libs/posts/src/index.ts"],
+      "@ng-sota/posts-api": ["libs/posts/posts-api/src/index.ts"],
+      "@ng-sota/posts-impl": ["libs/posts/posts-impl/src/index.ts"],
+      "@ng-sota/posts-ui": ["libs/posts/posts-ui/src/index.ts"],
+      "@ng-sota/profile": ["features/profile/src/index.ts"],
       "@ng-sota/profile-presentation": [
         "features/profile/profile-presentation/src/index.ts"
       ],
-      "@ng-sota/supabase": [
-        "libs/supabase/src/index.ts"
-      ]
+      "@ng-sota/supabase": ["libs/supabase/src/index.ts"],
+      "@ng-sota/ui": ["shared/ui/src/index.ts"]
     }
   },
-  "exclude": [
-    "node_modules",
-    "tmp"
-  ]
+  "exclude": ["node_modules", "tmp"]
 }

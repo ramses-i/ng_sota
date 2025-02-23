@@ -5,7 +5,8 @@
   "prefix": "lib",
   "projectType": "library",
   "tags": [
-    "scope:impl"
+    "scope:posts",
+    "layer:impl"
   ],
   "targets": {
     "test": {

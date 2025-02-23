@@ -1,7 +1,7 @@
 {
-  "name": "posts-presentation",
+  "name": "posts-ui",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "libs/posts/posts-presentation/src",
+  "sourceRoot": "libs/posts/posts-ui/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [
@@ -15,7 +15,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "libs/posts/posts-presentation/jest.config.ts"
+        "jestConfig": "libs/posts/posts-ui/jest.config.ts"
       }
     },
     "lint": {

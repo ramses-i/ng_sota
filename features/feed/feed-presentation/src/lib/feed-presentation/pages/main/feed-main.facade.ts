@@ -6,8 +6,8 @@ import {
   DPosts,
   GetPostsUseCase,
   PostsError,
-} from 'libs/posts/posts-api/src';
-import { DPostsToPosts } from 'libs/posts/posts-presentation/src';
+} from '@ng-sota/posts-api';
+import { DPostsToPosts } from '@ng-sota/posts-ui';
 
 @Injectable({ providedIn: 'root' })
 export class FeedMainFacade {

@@ -6,7 +6,7 @@
   "projectType": "library",
   "tags": [
     "scope:shared",
-    "layer:ui"
+    "layer:presentation"
   ],
   "targets": {
     "test": {

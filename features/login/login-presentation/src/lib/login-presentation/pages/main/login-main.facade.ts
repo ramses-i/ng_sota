@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
 import { match } from 'fp-ts/Either';
 import { Router } from '@angular/router';
-import { AuthError, LoginUseCase } from 'libs/auth/auth-api/src';
+import { AuthError, LoginUseCase } from '@ng-sota/auth-api';
 
 @Injectable({ providedIn: 'root' })
 export class LoginMainFacade {

@@ -25,9 +25,7 @@ export default [
               onlyDependOnLibsWithTags: [
                 'layer:presentation',
                 'layer:domain',
-                'scope:shared',
-                'scope:core',
-                'scope:api',
+                'layer:api',
               ],
             },
             {
