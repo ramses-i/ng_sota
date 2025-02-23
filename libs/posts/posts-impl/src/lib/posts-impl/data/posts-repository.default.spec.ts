@@ -38,7 +38,6 @@ describe('PostsRepositoryDefault', () => {
     repository = TestBed.inject(PostsRepositoryDefault);
   });
 
-  // Test para getPosts
   describe('getPosts', () => {
     it('should get posts successfully', async () => {
       remoteDataSourceMock.getPosts.mockResolvedValue(right(mockDPosts));
@@ -76,7 +75,6 @@ describe('PostsRepositoryDefault', () => {
     });
   });
 
-  // Test para getPostsFromUser
   describe('getPostsFromUser', () => {
     it('should get posts from a specific user successfully', async () => {
       remoteDataSourceMock.getPostsFromUser.mockResolvedValue(
@@ -113,7 +111,6 @@ describe('PostsRepositoryDefault', () => {
     });
   });
 
-  // Test para createPost
   describe('createPost', () => {
     it('should create a post successfully', async () => {
       remoteDataSourceMock.createPost.mockResolvedValue(right(true));

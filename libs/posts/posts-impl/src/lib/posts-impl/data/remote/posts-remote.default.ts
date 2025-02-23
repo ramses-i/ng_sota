@@ -25,6 +25,7 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
 
       return right(PostsResponseToDomain(result.data));
     } catch (error) {
+      console.error('getPosts:', error);
       return left(new PostsError('getPosts Call Error 1'));
     }
   }
@@ -42,6 +43,7 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
 
       return right(PostsResponseToDomain(result.data));
     } catch (error) {
+      console.error('getPostsFromUser:', error);
       return left(new PostsError('getPostsFromUser Call Error 1'));
     }
   }
@@ -60,6 +62,7 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
 
       return right(result.status == HttpStatusCode.Created);
     } catch (error) {
+      console.error('createPost:', error);
       return left(new PostsError('createPost Call Error 1'));
     }
   }

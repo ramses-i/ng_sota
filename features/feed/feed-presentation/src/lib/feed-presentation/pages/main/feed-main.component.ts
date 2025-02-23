@@ -7,7 +7,6 @@ import {
   SpinnerComponent,
 } from '@ng-sota/ui';
 import { FeedMainFacade } from './feed-main.facade';
-import { AuthUser } from '@ng-sota/auth-api';
 
 @Component({
   selector: 'lib-feed-main',

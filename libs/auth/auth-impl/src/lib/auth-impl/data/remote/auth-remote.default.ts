@@ -19,6 +19,7 @@ export class AuthRemoteDataSourceDefault extends AuthRemoteDataSource {
       await this.authService.login(username, password);
       return right(this.authService.isAuthenticated());
     } catch (error) {
+      console.error('doLogin:', error);
       return left(new AuthError('Supabase Auth Error 1'));
     }
   }
@@ -28,6 +29,7 @@ export class AuthRemoteDataSourceDefault extends AuthRemoteDataSource {
       await this.authService.logout();
       return right(true);
     } catch (error) {
+      console.error('doLogout:', error);
       return left(new AuthError('Supabase Auth Error 1'));
     }
   }

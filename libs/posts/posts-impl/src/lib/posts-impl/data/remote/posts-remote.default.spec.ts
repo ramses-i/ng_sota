@@ -4,8 +4,8 @@ import { PostsService } from '@ng-sota/supabase';
 import { match } from 'fp-ts/lib/Either';
 import { PostgrestResponse } from '@supabase/supabase-js';
 import { PostResponse } from './model/response/post.response';
-import { HttpStatusCode } from 'axios';
 import { DPosts, PostsError } from '@ng-sota/posts-api';
+import { HttpStatusCode } from '@angular/common/http';
 
 describe('PostsRemoteDataSourceDefault', () => {
   let dataSource: PostsRemoteDataSourceDefault;
@@ -53,7 +53,6 @@ describe('PostsRemoteDataSourceDefault', () => {
     dataSource = TestBed.inject(PostsRemoteDataSourceDefault);
   });
 
-  // Test para getPosts
   describe('getPosts', () => {
     it('should get posts successfully with new DPost fields', async () => {
       const mockResponse: PostgrestResponse<PostResponse> = {
@@ -123,7 +122,6 @@ describe('PostsRemoteDataSourceDefault', () => {
     });
   });
 
-  // Test para getPostsFromUser
   describe('getPostsFromUser', () => {
     it('should get posts from a specific user with new DPost fields', async () => {
       const mockResponse: PostgrestResponse<PostResponse> = {
