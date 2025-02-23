@@ -15,7 +15,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "features/feed/src/lib/feed/feed-presentation/jest.config.ts"
+        "jestConfig": "features/feed/feed-presentation/jest.config.ts"
       }
     },
     "lint": {

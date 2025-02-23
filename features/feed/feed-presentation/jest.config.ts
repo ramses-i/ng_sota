@@ -1,9 +1,9 @@
 export default {
   displayName: 'feed-presentation',
-  preset: '../../../../../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory:
-    '../../../../../../coverage/features/feed/src/lib/feed/feed-presentation',
+    '../../../coverage/features/feed/src/lib/feed/feed-presentation',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

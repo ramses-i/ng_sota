@@ -1,9 +1,9 @@
 export default {
   displayName: 'login-presentation',
-  preset: '../../../../../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory:
-    '../../../../../../coverage/features/login/src/lib/login/login-presentation',
+    '../../../coverage/features/login/src/lib/login/login-presentation',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

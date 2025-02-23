@@ -1,4 +1,5 @@
 // Atoms
+export * from './lib/ui/atoms/spinner/spinner.component';
 export * from './lib/ui/atoms/avatar/avatar.component';
 export * from './lib/ui/atoms/button/button.component';
 export * from './lib/ui/atoms/input/input-field.component';

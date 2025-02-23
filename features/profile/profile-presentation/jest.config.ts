@@ -1,9 +1,9 @@
 export default {
   displayName: 'profile-presentation',
-  preset: '../../../../../../jest.preset.js',
+  preset: '../../../jest.preset.js',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],
   coverageDirectory:
-    '../../../../../../coverage/features/profile/src/lib/profile/profile-presentation',
+    '../../../coverage/features/profile/src/lib/profile/profile-presentation',
   transform: {
     '^.+\\.(ts|mjs|js|html)$': [
       'jest-preset-angular',

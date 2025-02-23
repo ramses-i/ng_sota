@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   NavbarComponent,
   PostFormComponent,
-  PostListComponent,
-}from '@ng-sota/ui';
+  PostListComponent, SpinnerComponent,
+} from '@ng-sota/ui';
 import { ProfileMainFacade } from './profile-main.facade';
 
 @Component({
@@ -14,10 +14,13 @@ import { ProfileMainFacade } from './profile-main.facade';
     NavbarComponent,
     PostFormComponent,
     PostListComponent,
+    SpinnerComponent,
   ],
   templateUrl: './profile-main.component.html',
 })
 export class ProfileMainComponent {
+  errorMessage = computed(() => this.controller.errorMessage());
+  isLoading = computed(() => this.controller.isLoading());
   posts = computed(() => this.controller.posts());
 
   constructor(private controller: ProfileMainFacade) {

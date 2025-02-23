@@ -15,7 +15,7 @@
         "{workspaceRoot}/coverage/{projectRoot}"
       ],
       "options": {
-        "jestConfig": "features/profile/src/lib/profile/profile-presentation/jest.config.ts"
+        "jestConfig": "features/profile/profile-presentation/jest.config.ts"
       }
     },
     "lint": {
