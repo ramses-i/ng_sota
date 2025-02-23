@@ -6,6 +6,7 @@ import { PostResponse } from './model/response/post.response';
 import { PostsResponseToDomain } from './mapper/post.mapper';
 import { PostsRemoteDataSource } from '../posts-remote.datasource';
 import { DPosts, PostsError } from '@ng-sota/posts-api';
+import { HttpStatusCode } from '@angular/common/http';
 
 @Injectable({ providedIn: 'root' })
 export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
@@ -32,7 +33,8 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
     userId: string
   ): Promise<Either<Error, DPosts>> {
     try {
-      const result = await this.postsService.getPostsByUser(userId);
+      const result: PostgrestResponse<PostResponse> =
+        await this.postsService.getPostsByUser(userId);
 
       if (result.error) {
         return left(new PostsError(result.error.message));
@@ -46,8 +48,14 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
 
   override async createPost(content: string): Promise<Either<Error, boolean>> {
     try {
-      await this.postsService.createPost(content);
-      return right(true);
+      const result: PostgrestResponse<PostResponse> =
+        await this.postsService.createPost(content);
+
+      if (result.error) {
+        return left(new PostsError(result.error.message));
+      }
+
+      return right(result.status == HttpStatusCode.Created);
     } catch (error) {
       return left(new PostsError('createPost Call Error 1'));
     }

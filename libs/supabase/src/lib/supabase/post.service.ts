@@ -27,14 +27,17 @@ export class PostsService {
 
   async createPost(content: string) {
     const userId = this.authService.currentUserId();
-    return this.supabase.from('posts').insert([
-      {
-        content: content,
-        user_id: userId,
-        device: 'Web',
-        location: 'Location',
-        tou_compliant: true,
-      },
-    ]);
+    return this.supabase
+      .from('posts')
+      .insert([
+        {
+          content: content,
+          user_id: userId,
+          device: 'Web',
+          location: 'Location',
+          tou_compliant: true,
+        },
+      ])
+      .select();
   }
 }

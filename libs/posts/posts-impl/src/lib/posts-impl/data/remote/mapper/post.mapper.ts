@@ -11,7 +11,7 @@ export function PostsResponseToDomain(postsResponse: PostResponse[]): DPosts {
   };
 }
 
-function PostResponseToPost(postResponse: PostResponse): DPost {
+export function PostResponseToPost(postResponse: PostResponse): DPost {
   return {
     id: postResponse.id,
     userId: postResponse.user_id,
