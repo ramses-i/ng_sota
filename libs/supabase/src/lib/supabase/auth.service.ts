@@ -54,7 +54,7 @@ export class AuthService {
           observer.complete();
         })
         .catch((error) => {
-          console.error('Error al recuperar sesión:', error);
+          console.error('Error retrieving session:', error);
           observer.next(false);
           observer.complete();
         });
@@ -63,7 +63,12 @@ export class AuthService {
 
   private listenToAuthChanges() {
     supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth change event:', event, 'Session null?:', session != null);
+      console.log(
+        'Auth change event:',
+        event,
+        'Session null?:',
+        session != null
+      );
       this.userSubject.next(session?.user ?? null);
     });
   }

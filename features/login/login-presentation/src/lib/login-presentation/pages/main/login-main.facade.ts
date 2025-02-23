@@ -22,7 +22,7 @@ export class LoginMainFacade {
         if (isAuthorized) {
           this.router.navigate(['/feed']);
         } else {
-          console.error('Credentials were not authorized');
+          this.errorMessage.set('User is deactivated, please contact support');
         }
       }
     )(result);

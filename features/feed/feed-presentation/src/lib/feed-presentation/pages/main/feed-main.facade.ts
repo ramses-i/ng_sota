@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { match } from 'fp-ts/Either';
-import { Posts }from '@ng-sota/ui';
+import { Posts } from '@ng-sota/ui';
 import {
   CreatePostUseCase,
   DPosts,
@@ -44,10 +44,11 @@ export class FeedMainFacade {
       (error: PostsError) => this.errorMessage.set(error.message),
       (isCreated: boolean) => {
         if (isCreated) {
-          console.log('Successfully published');
           this.getFeed();
         } else {
-          console.log('Error creating post');
+          this.errorMessage.set(
+            'Could not create post, please try again later.'
+          );
         }
       }
     )(result);

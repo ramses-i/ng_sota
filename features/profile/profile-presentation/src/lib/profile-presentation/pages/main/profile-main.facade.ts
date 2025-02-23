@@ -44,10 +44,11 @@ export class ProfileMainFacade {
       (error: PostsError) => this.errorMessage.set(error.message),
       (isCreated: boolean) => {
         if (isCreated) {
-          console.log('Successfully published');
           this.getUserFeed();
         } else {
-          console.log('Error creating post');
+          this.errorMessage.set(
+            'Could not create post, please try again later.'
+          );
         }
       }
     )(result);
