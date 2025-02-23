@@ -12,6 +12,10 @@ npx nx graph
 
 ## Basic commands
 
+Make sure to put your Supabase project URL and Token on:
+
+**ng_sota/libs/supabase/src/lib/supabase/supabase.config.ts**
+
 To run the dev server for your app, use:
 
 ```sh
@@ -112,7 +116,15 @@ docker run -d -p 5173:5173 --name ngsota-contianer ngsota
 
 ## CI
 
+Lint check all modules code:
+
 ```sh
 npx nx run-many --target=lint --all
+```
+
+Test check all modules code:
+
+```sh
 npx nx run-many --target=test --all
+
 ```

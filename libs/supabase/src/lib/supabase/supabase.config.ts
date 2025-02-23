@@ -1,8 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
 export const supabase = createClient(
-    'URL',
-    'TOKEN',
+  'https://myproject.supabase.co',
+  'myprojectoken',
   {
     auth: {
       persistSession: true,
