@@ -1,7 +1,7 @@
 {
   "name": "profile-presentation",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "features/profile/src/lib/profile/profile-presentation/src",
+  "sourceRoot": "features/profile/profile-presentation/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [

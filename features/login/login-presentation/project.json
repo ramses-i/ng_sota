@@ -1,7 +1,7 @@
 {
   "name": "login-presentation",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "features/login/src/lib/login/login-presentation/src",
+  "sourceRoot": "features/login/login-presentation/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [

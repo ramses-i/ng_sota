@@ -1,7 +1,7 @@
 {
   "name": "feed-presentation",
   "$schema": "../../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "features/feed/src/lib/feed/feed-presentation/src",
+  "sourceRoot": "features/feed/feed-presentation/src",
   "prefix": "lib",
   "projectType": "library",
   "tags": [
