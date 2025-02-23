@@ -1,6 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { match } from 'fp-ts/Either';
-import { Posts } from 'shared/ui/src';
+import { Posts }from '@ng-sota/ui';
 import {
   CreatePostUseCase,
   DPosts,

@@ -4,7 +4,7 @@ import {
   NavbarComponent,
   PostFormComponent,
   PostListComponent,
-} from 'shared/ui/src';
+}from '@ng-sota/ui';
 import { FeedMainFacade } from './feed-main.facade';
 
 @Component({

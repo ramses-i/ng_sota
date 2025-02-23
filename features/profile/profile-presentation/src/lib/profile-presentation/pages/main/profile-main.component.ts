@@ -4,7 +4,7 @@ import {
   NavbarComponent,
   PostFormComponent,
   PostListComponent,
-} from 'shared/ui/src';
+}from '@ng-sota/ui';
 import { ProfileMainFacade } from './profile-main.facade';
 
 @Component({

@@ -6,8 +6,8 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { FormFieldComponent } from 'shared/ui/src';
-import { ButtonComponent } from 'shared/ui/src';
+import { FormFieldComponent } from '../../molecules/form-field/form-field.component';
+import { ButtonComponent } from '../../atoms/button/button.component';
 
 @Component({
   imports: [FormFieldComponent, ButtonComponent, ReactiveFormsModule],
