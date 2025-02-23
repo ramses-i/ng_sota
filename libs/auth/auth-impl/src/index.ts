@@ -6,3 +6,4 @@ export * from './lib/auth-impl/domain/usecases/get-status.default';
 export * from './lib/auth-impl/domain/usecases/get-user.default';
 export * from './lib/auth-impl/domain/usecases/login.default';
 export * from './lib/auth-impl/domain/usecases/logout.default';
+export * from './lib/auth-impl/domain/usecases/check-session.default';

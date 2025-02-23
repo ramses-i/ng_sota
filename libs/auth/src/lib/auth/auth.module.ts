@@ -4,12 +4,14 @@ import {
   AuthRemoteDataSourceDefault,
   AuthRepository,
   AuthRepositoryDefault,
+  CheckSessionUseCaseDefault,
   GetStatusUseCaseDefault,
   GetUserUseCaseDefault,
   LoginUseCaseDefault,
   LogoutUseCaseDefault,
 } from '@ng-sota/auth-impl';
 import {
+  CheckSessionUseCase,
   GetStatusUseCase,
   GetUserUseCase,
   LoginUseCase,
@@ -40,5 +42,9 @@ export const authDependencies: Provider[] = [
   {
     provide: LogoutUseCase,
     useClass: LogoutUseCaseDefault,
+  },
+  {
+    provide: CheckSessionUseCase,
+    useClass: CheckSessionUseCaseDefault,
   },
 ];

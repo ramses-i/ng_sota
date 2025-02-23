@@ -4,3 +4,4 @@ export * from './lib/auth-api/usecases/login.usecase';
 export * from './lib/auth-api/usecases/logout.usecase';
 export * from './lib/auth-api/usecases/get-status.usecase';
 export * from './lib/auth-api/usecases/get-user.usecase';
+export * from './lib/auth-api/usecases/check-session.usecase';

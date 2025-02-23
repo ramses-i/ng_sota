@@ -8,19 +8,19 @@ import {
 
 import { Observable } from 'rxjs';
 import { first, map } from 'rxjs/operators';
-import { AuthService } from '@ng-sota/supabase';
+import { CheckSessionUseCase } from '@ng-sota/auth-api';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private session: CheckSessionUseCase, private router: Router) {}
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): Observable<boolean> {
-    return this.authService.checkSession().pipe(
+    return this.session.execute().pipe(
       map((isAuthenticated) => {
         console.log(
           'AuthGuard: isAuthenticated:',

@@ -18,7 +18,7 @@
       "@ng-sota/auth": ["libs/auth/src/index.ts"],
       "@ng-sota/auth-api": ["libs/auth/auth-api/src/index.ts"],
       "@ng-sota/auth-impl": ["libs/auth/auth-impl/src/index.ts"],
-      "@ng-sota/core": ["core/src/index.ts"],
+      "@ng-sota/core": ["libs/core/src/index.ts"],
       "@ng-sota/feed": ["features/feed/src/index.ts"],
       "@ng-sota/feed-presentation": [
         "features/feed/feed-presentation/src/index.ts"

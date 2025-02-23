@@ -1,5 +1,6 @@
 import { Either } from 'fp-ts/Either';
 import { AuthUser } from '@ng-sota/auth-api';
+import { Observable } from 'rxjs';
 
 export abstract class AuthRepository {
   abstract doLogin(
@@ -12,4 +13,6 @@ export abstract class AuthRepository {
   abstract getAuthStatus(): Promise<Either<Error, boolean>>;
 
   abstract getUser(): Promise<Either<Error, AuthUser>>;
+
+  abstract checkSession(): Observable<boolean>;
 }

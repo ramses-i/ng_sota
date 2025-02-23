@@ -3,6 +3,8 @@ import { Either } from 'fp-ts/Either';
 import { AuthRepository } from '../domain/repository/auth.repository';
 import { AuthRemoteDataSource } from './auth-remote.datasource';
 import { AuthUser } from '@ng-sota/auth-api';
+import { boolean, string } from 'fp-ts';
+import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class AuthRepositoryDefault extends AuthRepository {
@@ -27,5 +29,9 @@ export class AuthRepositoryDefault extends AuthRepository {
 
   override async getUser(): Promise<Either<Error, AuthUser>> {
     return this.authRemoteDataSource.getUser();
+  }
+
+  checkSession(): Observable<boolean> {
+    return this.authRemoteDataSource.checkSession();
   }
 }
