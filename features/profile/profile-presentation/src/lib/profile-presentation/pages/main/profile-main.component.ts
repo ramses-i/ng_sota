@@ -15,15 +15,7 @@ import { ProfileMainFacade } from './profile-main.facade';
     PostFormComponent,
     PostListComponent,
   ],
-  template: `
-    <lib-navbar></lib-navbar>
-    <main class="pb-16 lg:pt-16 lg:pb-24 bg-white dark:bg-gray-900">
-      <div class="max-w-screen-xl mx-auto">
-        <lib-post-form></lib-post-form>
-        <lib-post-list [posts]="posts()"></lib-post-list>
-      </div>
-    </main>
-  `,
+  templateUrl: './profile-main.component.html',
 })
 export class ProfileMainComponent {
   posts = computed(() => this.controller.posts());

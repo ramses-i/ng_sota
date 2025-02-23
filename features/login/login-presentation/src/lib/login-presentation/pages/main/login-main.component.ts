@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoginMainFacade } from './login-main.facade';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoginFormComponent } from '../../components/organisms/login-form/login-form.component';
+import { LoginFormComponent } from '@ng-sota/ui';
 
 @Component({
   selector: 'lib-login-main',

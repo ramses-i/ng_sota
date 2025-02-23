@@ -13,6 +13,7 @@ export * from './lib/ui/molecules/user-profile/user-profile.component';
 export * from './lib/ui/organisms/navbar/navbar.component';
 export * from './lib/ui/organisms/post-form/post-form.component';
 export * from './lib/ui/organisms/post-list/post-list.component';
+export * from './lib/ui/organisms/login-form/login-form.component';
 // Templates
 export * from './lib/ui/templates/feed-tpl/feed-tpl.component';
 // Models
