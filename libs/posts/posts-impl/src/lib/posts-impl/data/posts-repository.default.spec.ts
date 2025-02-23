@@ -12,9 +12,11 @@ describe('PostsRepositoryDefault', () => {
     items: [
       {
         id: '1',
-        userId: '123',
-        content: 'Este es un post de prueba',
         createdAt: '2024-02-23T10:00:00Z',
+        content: 'Post de prueba',
+        userId: '123',
+        userAvatar: 'https://example.com/avatar.png',
+        userName: 'Test User',
       },
     ],
   };
@@ -36,6 +38,7 @@ describe('PostsRepositoryDefault', () => {
     repository = TestBed.inject(PostsRepositoryDefault);
   });
 
+  // Test para getPosts
   describe('getPosts', () => {
     it('should get posts successfully', async () => {
       remoteDataSourceMock.getPosts.mockResolvedValue(right(mockDPosts));
@@ -43,32 +46,39 @@ describe('PostsRepositoryDefault', () => {
       const result = await repository.getPosts();
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (dPosts: DPosts) => {
-          expect(dPosts.items.length).toBe(1);
-          expect(dPosts.items[0].id).toBe('1');
-          expect(dPosts.items[0].content).toBe('Este es un post de prueba');
+        (posts: DPosts) => {
+          expect(posts.items.length).toBe(1);
+          const post = posts.items[0];
+          expect(post.id).toBe('1');
+          expect(post.content).toBe('Post de prueba');
+          expect(post.userId).toBe('123');
+          expect(post.userAvatar).toBe('https://example.com/avatar.png');
+          expect(post.userName).toBe('Test User');
         }
       )(result);
+
+      expect(remoteDataSourceMock.getPosts).toHaveBeenCalled();
     });
 
-    it('should handle error when getPosts fails', async () => {
+    it('should return error if getPosts fails', async () => {
       remoteDataSourceMock.getPosts.mockResolvedValue(
-        left(new PostsError('Error al obtener posts'))
+        left(new Error('Failed to get posts'))
       );
 
       const result = await repository.getPosts();
 
       match(
-        (error: Error) => expect(error.message).toBe('Error al obtener posts'),
+        (error: Error) => expect(error.message).toBe('Failed to get posts'),
         () => fail('Expected error but got success')
       )(result);
     });
   });
 
+  // Test para getPostsFromUser
   describe('getPostsFromUser', () => {
-    it('should get posts from user successfully', async () => {
+    it('should get posts from a specific user successfully', async () => {
       remoteDataSourceMock.getPostsFromUser.mockResolvedValue(
         right(mockDPosts)
       );
@@ -76,52 +86,61 @@ describe('PostsRepositoryDefault', () => {
       const result = await repository.getPostsFromUser('123');
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (dPosts: DPosts) => {
-          expect(dPosts.items.length).toBe(1);
-          expect(dPosts.items[0].userId).toBe('123');
+        (posts: DPosts) => {
+          expect(posts.items.length).toBe(1);
+          const post = posts.items[0];
+          expect(post.userId).toBe('123');
         }
       )(result);
+
+      expect(remoteDataSourceMock.getPostsFromUser).toHaveBeenCalledWith('123');
     });
 
-    it('should handle error when getPostsFromUser fails', async () => {
+    it('should return error if getPostsFromUser fails', async () => {
       remoteDataSourceMock.getPostsFromUser.mockResolvedValue(
-        left(new PostsError('Error al obtener posts del usuario'))
+        left(new Error('Failed to get user posts'))
       );
 
       const result = await repository.getPostsFromUser('123');
 
       match(
         (error: Error) =>
-          expect(error.message).toBe('Error al obtener posts del usuario'),
+          expect(error.message).toBe('Failed to get user posts'),
         () => fail('Expected error but got success')
       )(result);
     });
   });
 
+  // Test para createPost
   describe('createPost', () => {
-    it('should create post successfully', async () => {
+    it('should create a post successfully', async () => {
       remoteDataSourceMock.createPost.mockResolvedValue(right(true));
 
-      const result = await repository.createPost('Este es un nuevo post');
+      const result = await repository.createPost('123', 'Nuevo post');
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (value: boolean) => expect(value).toBe(true)
+        (isCreated: boolean) => expect(isCreated).toBe(true)
       )(result);
+
+      expect(remoteDataSourceMock.createPost).toHaveBeenCalledWith(
+        '123',
+        'Nuevo post'
+      );
     });
 
-    it('should handle error when createPost fails', async () => {
+    it('should return error if createPost fails', async () => {
       remoteDataSourceMock.createPost.mockResolvedValue(
-        left(new PostsError('Error al crear post'))
+        left(new Error('Failed to create post'))
       );
 
-      const result = await repository.createPost('Post fallido');
+      const result = await repository.createPost('123', 'Nuevo post');
 
       match(
-        (error: Error) => expect(error.message).toBe('Error al crear post'),
+        (error: Error) => expect(error.message).toBe('Failed to create post'),
         () => fail('Expected error but got success')
       )(result);
     });

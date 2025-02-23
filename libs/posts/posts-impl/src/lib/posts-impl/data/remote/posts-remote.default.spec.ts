@@ -5,52 +5,36 @@ import { match } from 'fp-ts/lib/Either';
 import { PostgrestResponse } from '@supabase/supabase-js';
 import { PostResponse } from './model/response/post.response';
 import { HttpStatusCode } from 'axios';
-import { DPosts } from '@ng-sota/posts-api';
+import { DPosts, PostsError } from '@ng-sota/posts-api';
 
 describe('PostsRemoteDataSourceDefault', () => {
   let dataSource: PostsRemoteDataSourceDefault;
   let postsServiceMock: jest.Mocked<PostsService>;
 
-  const mockPostResponse: PostResponse[] = [
+  const mockPostsResponse: PostResponse[] = [
     {
       id: '1',
-      created_at: '2024-02-23T10:00:00Z',
-      content: 'Este es un post de prueba',
       user_id: '123',
-      user_email: 'user@example.com',
-    },
-    {
-      id: '2',
-      created_at: '2024-02-22T09:00:00Z',
-      content: 'Otro post de prueba',
-      user_id: '456',
-      user_email: 'other@example.com',
-    },
-    {
-      id: '3',
+      user_email: 'testuser@example.com',
+      avatar: 'https://example.com/avatar.png',
+      display_name: 'Test User',
+      content: 'Post de prueba',
       created_at: '2024-02-23T10:00:00Z',
-      content: 'Este es un post de prueba 2',
-      user_id: '123',
-      user_email: 'user@example.com',
     },
   ];
 
-  const mockUserPostResponse: PostResponse[] = [
-    {
-      id: '1',
-      created_at: '2024-02-23T10:00:00Z',
-      content: 'Este es un post de prueba',
-      user_id: '123',
-      user_email: 'user@example.com',
-    },
-    {
-      id: '3',
-      created_at: '2024-02-23T10:00:00Z',
-      content: 'Este es un post de prueba 2',
-      user_id: '123',
-      user_email: 'user@example.com',
-    },
-  ];
+  const mockDPosts: DPosts = {
+    items: [
+      {
+        id: '1',
+        userId: '123',
+        userAvatar: 'https://example.com/avatar.png',
+        userName: 'Test User',
+        content: 'Post de prueba',
+        createdAt: '2024-02-23T10:00:00Z',
+      },
+    ],
+  };
 
   beforeEach(() => {
     postsServiceMock = {
@@ -69,145 +53,202 @@ describe('PostsRemoteDataSourceDefault', () => {
     dataSource = TestBed.inject(PostsRemoteDataSourceDefault);
   });
 
+  // Test para getPosts
   describe('getPosts', () => {
-    it('should get posts successfully', async () => {
-      postsServiceMock.getPosts.mockResolvedValue({
-        data: mockPostResponse,
+    it('should get posts successfully with new DPost fields', async () => {
+      const mockResponse: PostgrestResponse<PostResponse> = {
+        data: mockPostsResponse,
         error: null,
-      } as PostgrestResponse<PostResponse>);
+        status: 200,
+        statusText: 'OK',
+        count: mockPostsResponse.length,
+      };
+
+      postsServiceMock.getPosts.mockResolvedValue(mockResponse);
 
       const result = await dataSource.getPosts();
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (dPosts: DPosts) => {
-          expect(dPosts.items.length).toBe(3);
-          expect(dPosts.items[0].id).toBe('1');
-          expect(dPosts.items[0].content).toBe('Este es un post de prueba');
-          expect(dPosts.items[1].id).toBe('2');
-          expect(dPosts.items[1].content).toBe('Otro post de prueba');
-          expect(dPosts.items[2].id).toBe('3');
-          expect(dPosts.items[2].content).toBe('Este es un post de prueba 2');
+        (posts: DPosts) => {
+          expect(posts.items.length).toBe(1);
+          const post = posts.items[0];
+          expect(post.id).toBe('1');
+          expect(post.userId).toBe('123');
+          expect(post.userAvatar).toBe('https://example.com/avatar.png');
+          expect(post.userName).toBe('Test User');
+          expect(post.content).toBe('Post de prueba');
+          expect(post.createdAt).toBe('2024-02-23T10:00:00Z');
         }
       )(result);
     });
 
-    it('should handle error when getPosts service returns an error', async () => {
-      postsServiceMock.getPosts.mockResolvedValue({
-        data: null,
-        error: { message: 'Error al obtener posts' },
-      } as PostgrestResponse<PostResponse>);
+    it('should return error if getPosts fails', async () => {
+      postsServiceMock.getPosts.mockRejectedValue(new Error('Network error'));
 
       const result = await dataSource.getPosts();
 
       match(
-        (error: Error) => expect(error.message).toBe('Error al obtener posts'),
+        (error: PostsError) =>
+          expect(error.message).toBe('getPosts Call Error 1'),
         () => fail('Expected error but got success')
       )(result);
     });
 
-    it('should handle exception when an unexpected error occurs', async () => {
-      postsServiceMock.getPosts.mockRejectedValue(
-        new Error('Unexpected error')
-      );
+    it('should return error if service returns an error response', async () => {
+      const mockErrorResponse: PostgrestResponse<PostResponse> = {
+        data: null,
+        error: {
+          message: 'Error retrieving posts',
+          details: '',
+          hint: '',
+          code: '400',
+          name: '',
+        },
+        status: 400,
+        statusText: 'Bad Request',
+        count: null,
+      };
+
+      postsServiceMock.getPosts.mockResolvedValue(mockErrorResponse);
 
       const result = await dataSource.getPosts();
 
       match(
-        (error: Error) => expect(error.message).toBe('getPosts Call Error 1'),
+        (error: PostsError) =>
+          expect(error.message).toBe('Error retrieving posts'),
         () => fail('Expected error but got success')
       )(result);
     });
   });
 
+  // Test para getPostsFromUser
   describe('getPostsFromUser', () => {
-    it('should get posts from user successfully', async () => {
-      postsServiceMock.getPostsByUser.mockResolvedValue({
-        data: mockUserPostResponse,
+    it('should get posts from a specific user with new DPost fields', async () => {
+      const mockResponse: PostgrestResponse<PostResponse> = {
+        data: mockPostsResponse,
         error: null,
-      } as PostgrestResponse<PostResponse>);
+        status: 200,
+        statusText: 'OK',
+        count: mockPostsResponse.length,
+      };
+
+      postsServiceMock.getPostsByUser.mockResolvedValue(mockResponse);
 
       const result = await dataSource.getPostsFromUser('123');
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (dPosts: DPosts) => {
-          expect(dPosts.items.length).toBe(2);
-          expect(dPosts.items[0].userId).toBe('123');
-          expect(dPosts.items[1].userId).toBe('123');
-          expect(dPosts.items[0].content).toBe('Este es un post de prueba');
-          expect(dPosts.items[1].content).toBe('Este es un post de prueba 2');
+        (posts: DPosts) => {
+          expect(posts.items.length).toBe(1);
+          const post = posts.items[0];
+          expect(post.id).toBe('1');
+          expect(post.userId).toBe('123');
+          expect(post.userAvatar).toBe('https://example.com/avatar.png');
+          expect(post.userName).toBe('Test User');
+          expect(post.content).toBe('Post de prueba');
         }
       )(result);
     });
 
-    it('should handle error when getPostsFromUser fails', async () => {
-      postsServiceMock.getPostsByUser.mockResolvedValue({
-        data: null,
-        error: { message: 'Error al obtener posts del usuario' },
-      } as PostgrestResponse<PostResponse>);
+    it('should return error if getPostsFromUser fails', async () => {
+      postsServiceMock.getPostsByUser.mockRejectedValue(
+        new Error('Network error')
+      );
 
       const result = await dataSource.getPostsFromUser('123');
 
       match(
-        (error: Error) =>
-          expect(error.message).toBe('Error al obtener posts del usuario'),
+        (error: PostsError) =>
+          expect(error.message).toBe('getPostsFromUser Call Error 1'),
+        () => fail('Expected error but got success')
+      )(result);
+    });
+
+    it('should return error if service returns an error response', async () => {
+      const mockErrorResponse: PostgrestResponse<PostResponse> = {
+        data: null,
+        error: {
+          message: 'User not found',
+          code: '404',
+          details: '',
+          hint: '',
+          name: '',
+        },
+        status: 404,
+        statusText: 'Not Found',
+        count: null,
+      };
+
+      postsServiceMock.getPostsByUser.mockResolvedValue(mockErrorResponse);
+
+      const result = await dataSource.getPostsFromUser('123');
+
+      match(
+        (error: PostsError) => expect(error.message).toBe('User not found'),
         () => fail('Expected error but got success')
       )(result);
     });
   });
 
+  // Test para createPost
   describe('createPost', () => {
-    it('should create post successfully when status is Created', async () => {
-      postsServiceMock.createPost.mockResolvedValue({
-        status: HttpStatusCode.Created,
-        data: [
-          {
-            id: '1',
-            created_at: '2024-02-23T10:00:00Z',
-            content: 'Este es un post de prueba',
-            user_id: '123',
-            user_email: 'user@example.com',
-          },
-        ],
+    it('should create a post successfully', async () => {
+      const mockResponse: PostgrestResponse<PostResponse> = {
+        data: mockPostsResponse,
         error: null,
-      } as PostgrestResponse<PostResponse>);
+        status: HttpStatusCode.Created,
+        statusText: 'Created',
+        count: mockPostsResponse.length,
+      };
 
-      const result = await dataSource.createPost('Este es un nuevo post');
+      postsServiceMock.createPost.mockResolvedValue(mockResponse);
+
+      const result = await dataSource.createPost('123', 'Nuevo post');
 
       match(
-        (error: Error) =>
+        (error: PostsError) =>
           fail(`Expected success but got error: ${error.message}`),
-        (value: boolean) => expect(value).toBe(true)
+        (isCreated: boolean) => expect(isCreated).toBe(true)
       )(result);
     });
 
-    it('should return false when post creation fails (status not Created)', async () => {
-      postsServiceMock.createPost.mockResolvedValue({
-        status: HttpStatusCode.BadRequest,
-        data: null,
-        error: { message: 'Error al crear post' },
-      } as PostgrestResponse<PostResponse>);
+    it('should return error if createPost fails', async () => {
+      postsServiceMock.createPost.mockRejectedValue(new Error('Network error'));
 
-      const result = await dataSource.createPost('Post fallido');
+      const result = await dataSource.createPost('123', 'Nuevo post');
 
       match(
-        (error: Error) => expect(error.message).toBe('Error al crear post'),
+        (error: PostsError) =>
+          expect(error.message).toBe('createPost Call Error 1'),
         () => fail('Expected error but got success')
       )(result);
     });
 
-    it('should handle exception when post creation throws an error', async () => {
-      postsServiceMock.createPost.mockRejectedValue(
-        new Error('Unexpected error')
-      );
+    it('should return error if service returns an error response', async () => {
+      const mockErrorResponse: PostgrestResponse<PostResponse> = {
+        data: null,
+        error: {
+          message: 'Failed to create post',
+          code: '400',
+          details: '',
+          hint: '',
+          name: '',
+        },
+        status: 400,
+        statusText: 'Bad Request',
+        count: null,
+      };
 
-      const result = await dataSource.createPost('Post fallido');
+      postsServiceMock.createPost.mockResolvedValue(mockErrorResponse);
+
+      const result = await dataSource.createPost('123', 'Nuevo post');
 
       match(
-        (error: Error) => expect(error.message).toBe('createPost Call Error 1'),
+        (error: PostsError) =>
+          expect(error.message).toBe('Failed to create post'),
         () => fail('Expected error but got success')
       )(result);
     });

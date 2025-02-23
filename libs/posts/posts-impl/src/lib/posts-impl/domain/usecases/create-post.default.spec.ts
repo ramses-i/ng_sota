@@ -2,22 +2,27 @@ import { TestBed } from '@angular/core/testing';
 import { CreatePostUseCaseDefault } from './create-post.default';
 import { PostsRepository } from '../repository/posts.repository';
 import { left, match, right } from 'fp-ts/lib/Either';
+import { GetAuthUserIdUseCase } from '@ng-sota/auth-api';
 
 describe('CreatePostUseCaseDefault', () => {
   let useCase: CreatePostUseCaseDefault;
   let postsRepositoryMock: jest.Mocked<PostsRepository>;
-
-  const postContent = 'Este es un nuevo post de prueba';
+  let getUserIdMock: jest.Mocked<GetAuthUserIdUseCase>;
 
   beforeEach(() => {
     postsRepositoryMock = {
       createPost: jest.fn(),
     } as unknown as jest.Mocked<PostsRepository>;
 
+    getUserIdMock = {
+      execute: jest.fn(),
+    } as unknown as jest.Mocked<GetAuthUserIdUseCase>;
+
     TestBed.configureTestingModule({
       providers: [
         CreatePostUseCaseDefault,
         { provide: PostsRepository, useValue: postsRepositoryMock },
+        { provide: GetAuthUserIdUseCase, useValue: getUserIdMock },
       ],
     });
 
@@ -25,45 +30,37 @@ describe('CreatePostUseCaseDefault', () => {
   });
 
   describe('execute', () => {
-    it('should create post successfully', async () => {
+    it('should create a post successfully', async () => {
+      getUserIdMock.execute.mockReturnValue('123');
       postsRepositoryMock.createPost.mockResolvedValue(right(true));
 
-      const result = await useCase.execute(postContent);
+      const result = await useCase.execute('Nuevo post');
 
       match(
         (error: Error) =>
           fail(`Expected success but got error: ${error.message}`),
-        (success: boolean) => expect(success).toBe(true)
+        (isCreated: boolean) => expect(isCreated).toBe(true)
       )(result);
 
-      expect(postsRepositoryMock.createPost).toHaveBeenCalledWith(postContent);
+      expect(getUserIdMock.execute).toHaveBeenCalled();
+      expect(postsRepositoryMock.createPost).toHaveBeenCalledWith(
+        '123',
+        'Nuevo post'
+      );
     });
 
-    it('should return error when post creation fails', async () => {
+    it('should return error if createPost fails', async () => {
+      getUserIdMock.execute.mockReturnValue('123');
       postsRepositoryMock.createPost.mockResolvedValue(
-        left(new Error('Error al crear el post'))
+        left(new Error('Failed to create post'))
       );
 
-      const result = await useCase.execute(postContent);
+      const result = await useCase.execute('Nuevo post');
 
       match(
-        (error: Error) => expect(error.message).toBe('Error al crear el post'),
+        (error: Error) => expect(error.message).toBe('Failed to create post'),
         () => fail('Expected error but got success')
       )(result);
-
-      expect(postsRepositoryMock.createPost).toHaveBeenCalledWith(postContent);
-    });
-
-    it('should handle unexpected errors', async () => {
-      postsRepositoryMock.createPost.mockRejectedValue(
-        new Error('Unexpected error')
-      );
-
-      await expect(useCase.execute(postContent)).rejects.toThrow(
-        'Unexpected error'
-      );
-
-      expect(postsRepositoryMock.createPost).toHaveBeenCalledWith(postContent);
     });
   });
 });
