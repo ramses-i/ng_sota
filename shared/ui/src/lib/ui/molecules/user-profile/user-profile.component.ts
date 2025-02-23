@@ -16,6 +16,6 @@ import { AvatarComponent } from '../../atoms/avatar/avatar.component';
   `,
 })
 export class UserProfileButtonComponent {
-  @Input() avatarUrl: string = 'https://i.pravatar.cc/150';
+  @Input() avatarUrl: string = '';
   @Input() profileLink: string = '/profile';
 }

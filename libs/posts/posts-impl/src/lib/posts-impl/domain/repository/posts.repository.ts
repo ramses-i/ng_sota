@@ -6,5 +6,8 @@ export abstract class PostsRepository {
 
   abstract getPostsFromUser(userId: string): Promise<Either<Error, DPosts>>;
 
-  abstract createPost(content: string): Promise<Either<Error, boolean>>;
+  abstract createPost(
+    userId: string,
+    content: string
+  ): Promise<Either<Error, boolean>>;
 }

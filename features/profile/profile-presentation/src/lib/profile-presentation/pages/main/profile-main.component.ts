@@ -22,6 +22,7 @@ export class ProfileMainComponent {
   errorMessage = computed(() => this.controller.errorMessage());
   isLoading = computed(() => this.controller.isLoading());
   posts = computed(() => this.controller.posts());
+  avatar = computed(() => this.controller.avatar());
 
   constructor(private controller: ProfileMainFacade) {
     this.controller.getUserFeed();

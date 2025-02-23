@@ -12,6 +12,7 @@ import { Post, Posts } from '../../model/posts.model';
           } @else {
               @for (post of publishedPosts; track post.id) {
                   <lib-post
+                          avatarUrl="{{post.user.avatar}}"
                           username="{{ post.user.name }}"
                           date="{{ post.publishDate }}"
                           content="{{ post.content }}"

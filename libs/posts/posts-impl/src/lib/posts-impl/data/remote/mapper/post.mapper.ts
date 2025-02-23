@@ -14,8 +14,10 @@ export function PostsResponseToDomain(postsResponse: PostResponse[]): DPosts {
 export function PostResponseToPost(postResponse: PostResponse): DPost {
   return {
     id: postResponse.id,
-    userId: postResponse.user_id,
-    content: postResponse.content,
     createdAt: postResponse.created_at,
+    content: postResponse.content,
+    userId: postResponse.user_id,
+    userAvatar: postResponse.avatar,
+    userName: postResponse.display_name,
   };
 }

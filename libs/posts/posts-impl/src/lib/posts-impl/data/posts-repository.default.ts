@@ -20,7 +20,10 @@ export class PostsRepositoryDefault extends PostsRepository {
     return this.feedRemoteDataSource.getPostsFromUser(userId);
   }
 
-  override async createPost(content: string): Promise<Either<Error, boolean>> {
-    return this.feedRemoteDataSource.createPost(content);
+  override async createPost(
+    userId: string,
+    content: string
+  ): Promise<Either<Error, boolean>> {
+    return this.feedRemoteDataSource.createPost(userId, content);
   }
 }

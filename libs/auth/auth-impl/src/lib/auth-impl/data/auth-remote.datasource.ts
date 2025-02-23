@@ -1,6 +1,5 @@
 import { Either } from 'fp-ts/Either';
-import { AuthUser } from '@ng-sota/auth-api';
-import {Observable} from "rxjs";
+import { Observable } from 'rxjs';
 
 export abstract class AuthRemoteDataSource {
   abstract doLogin(
@@ -10,9 +9,9 @@ export abstract class AuthRemoteDataSource {
 
   abstract doLogout(): Promise<Either<Error, boolean>>;
 
-  abstract getAuthStatus(): Promise<Either<Error, boolean>>;
+  abstract isAuthenticated(): boolean;
 
-  abstract getUser(): Promise<Either<Error, AuthUser>>;
+  abstract getUserId():string;
 
   abstract checkSession(): Observable<boolean>;
 }

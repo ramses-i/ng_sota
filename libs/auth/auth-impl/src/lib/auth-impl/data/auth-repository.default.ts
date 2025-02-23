@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Either } from 'fp-ts/Either';
 import { AuthRepository } from '../domain/repository/auth.repository';
 import { AuthRemoteDataSource } from './auth-remote.datasource';
-import { AuthUser } from '@ng-sota/auth-api';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -22,12 +21,12 @@ export class AuthRepositoryDefault extends AuthRepository {
     return this.authRemoteDataSource.doLogout();
   }
 
-  override async getAuthStatus(): Promise<Either<Error, boolean>> {
-    return this.authRemoteDataSource.getAuthStatus();
+  override isAuthenticated(): boolean {
+    return this.authRemoteDataSource.isAuthenticated();
   }
 
-  override async getUser(): Promise<Either<Error, AuthUser>> {
-    return this.authRemoteDataSource.getUser();
+  override getUserId(): string {
+    return this.authRemoteDataSource.getUserId();
   }
 
   checkSession(): Observable<boolean> {

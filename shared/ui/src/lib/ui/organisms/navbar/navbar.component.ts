@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserProfileButtonComponent } from '../../molecules/user-profile/user-profile.component';
 import { NavItemComponent } from '../../molecules/nav-item/nav-item.component';
 
@@ -13,7 +13,7 @@ import { NavItemComponent } from '../../molecules/nav-item/nav-item.component';
         <ul class="hidden md:flex md:space-x-8">
           <lib-nav-item link="/feed" label="Home"></lib-nav-item>
         </ul>
-        <lib-user-profile-button ></lib-user-profile-button>
+        <lib-user-profile-button avatarUrl="{{ avatar }}" />
         <ul class="hidden md:flex md:space-x-8">
           <lib-nav-item link="/auth/out" label="Logout"></lib-nav-item>
         </ul>
@@ -21,4 +21,6 @@ import { NavItemComponent } from '../../molecules/nav-item/nav-item.component';
     </nav>
   `,
 })
-export class NavbarComponent {}
+export class NavbarComponent {
+  @Input() avatar!: string;
+}

@@ -4,7 +4,9 @@ export interface DPosts {
 
 export interface DPost {
   readonly id: string;
-  readonly userId: string;
-  readonly content: string;
   readonly createdAt: string;
+  readonly content: string;
+  readonly userId: string;
+  readonly userAvatar: string;
+  readonly userName: string;
 }

@@ -46,10 +46,13 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
     }
   }
 
-  override async createPost(content: string): Promise<Either<Error, boolean>> {
+  override async createPost(
+    userId: string,
+    content: string
+  ): Promise<Either<Error, boolean>> {
     try {
       const result: PostgrestResponse<PostResponse> =
-        await this.postsService.createPost(content);
+        await this.postsService.createPost(userId, content);
 
       if (result.error) {
         return left(new PostsError(result.error.message));

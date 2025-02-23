@@ -10,9 +10,9 @@ export abstract class AuthRepository {
 
   abstract doLogout(): Promise<Either<Error, boolean>>;
 
-  abstract getAuthStatus(): Promise<Either<Error, boolean>>;
-
-  abstract getUser(): Promise<Either<Error, AuthUser>>;
-
   abstract checkSession(): Observable<boolean>;
+
+  abstract isAuthenticated(): boolean;
+
+  abstract getUserId(): string;
 }

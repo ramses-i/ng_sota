@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { AuthService } from '@ng-sota/supabase';
 import { AuthRemoteDataSource } from '../auth-remote.datasource';
 import { Either, left, right } from 'fp-ts/Either';
-import { AuthError, AuthUser } from '@ng-sota/auth-api';
+import { AuthError } from '@ng-sota/auth-api';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
@@ -32,25 +32,12 @@ export class AuthRemoteDataSourceDefault extends AuthRemoteDataSource {
     }
   }
 
-  override async getAuthStatus(): Promise<Either<Error, boolean>> {
-    try {
-      return right(this.authService.isAuthenticated());
-    } catch (error) {
-      return left(new AuthError('Supabase Auth Error 1'));
-    }
+  override isAuthenticated(): boolean {
+    return this.authService.isAuthenticated();
   }
 
-  override async getUser(): Promise<Either<Error, AuthUser>> {
-    try {
-      const user: AuthUser = {
-        id: this.authService.currentUserId(),
-        name: 'unknown',
-        avatar: 'https://i.pravatar.cc/150',
-      };
-      return right(user);
-    } catch (error) {
-      return left(new AuthError('Supabase Auth Error 1'));
-    }
+  override getUserId(): string {
+    return this.authService.currentUserId();
   }
 
   checkSession(): Observable<boolean> {

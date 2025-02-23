@@ -14,11 +14,16 @@ export class ProfileMainFacade {
   isLoading = signal(false);
   errorMessage = signal<string | null>(null);
   posts = signal<Posts>({ items: [] });
+  avatar = signal<string>('https://i.pravatar.cc/300');
 
   constructor(
     private getUserPosts: GetUserPostsUseCase,
     private createPost: CreatePostUseCase
   ) {}
+
+  async getUserAvatar() {
+    // TODO: Create profile-api , profile-impl and GetCurrentUser
+  }
 
   async getUserFeed() {
     this.isLoading.set(true);

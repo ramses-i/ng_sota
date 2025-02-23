@@ -3,24 +3,17 @@ import { AuthRepositoryDefault } from './auth-repository.default';
 import { AuthRemoteDataSource } from './auth-remote.datasource';
 import { of } from 'rxjs';
 import { left, match, right } from 'fp-ts/lib/Either';
-import { AuthUser } from '@ng-sota/auth-api';
 
 describe('AuthRepositoryDefault', () => {
   let repository: AuthRepositoryDefault;
   let remoteDataSourceMock: jest.Mocked<AuthRemoteDataSource>;
 
-  const mockUser: AuthUser = {
-    id: '123',
-    name: 'testuser',
-    avatar: 'avatar.png',
-  };
-
   beforeEach(() => {
     remoteDataSourceMock = {
       doLogin: jest.fn(),
       doLogout: jest.fn(),
-      getAuthStatus: jest.fn(),
-      getUser: jest.fn(),
+      isAuthenticated: jest.fn(),
+      getUserId: jest.fn(),
       checkSession: jest.fn().mockReturnValue(of(true)),
     } as unknown as jest.Mocked<AuthRemoteDataSource>;
 
@@ -86,60 +79,28 @@ describe('AuthRepositoryDefault', () => {
     )(result);
   });
 
-  it('should get auth status successfully', async () => {
-    remoteDataSourceMock.getAuthStatus.mockResolvedValue(right(true));
+  it('should return true if user is authenticated', () => {
+    remoteDataSourceMock.isAuthenticated.mockReturnValue(true);
 
-    const result = await repository.getAuthStatus();
-    expect(remoteDataSourceMock.getAuthStatus).toHaveBeenCalled();
-
-    match(
-      (error: Error) =>
-        fail(`Expected success but got error: ${error.message}`),
-      (value: boolean) => expect(value).toBe(true)
-    )(result);
+    const result = repository.isAuthenticated();
+    expect(result).toBe(true);
+    expect(remoteDataSourceMock.isAuthenticated).toHaveBeenCalled();
   });
 
-  it('should handle auth status failure', async () => {
-    remoteDataSourceMock.getAuthStatus.mockResolvedValue(
-      left(new Error('Failed to get auth status'))
-    );
+  it('should return false if user is not authenticated', () => {
+    remoteDataSourceMock.isAuthenticated.mockReturnValue(false);
 
-    const result = await repository.getAuthStatus();
-
-    match(
-      (error: Error) => expect(error.message).toBe('Failed to get auth status'),
-      () => fail('Expected error but got success')
-    )(result);
+    const result = repository.isAuthenticated();
+    expect(result).toBe(false);
+    expect(remoteDataSourceMock.isAuthenticated).toHaveBeenCalled();
   });
 
-  it('should get user successfully', async () => {
-    remoteDataSourceMock.getUser.mockResolvedValue(right(mockUser));
+  it('should return user ID', () => {
+    remoteDataSourceMock.getUserId.mockReturnValue('123');
 
-    const result = await repository.getUser();
-    expect(remoteDataSourceMock.getUser).toHaveBeenCalled();
-
-    match(
-      (error: Error) =>
-        fail(`Expected success but got error: ${error.message}`),
-      (user: AuthUser) => {
-        expect(user.id).toBe('123');
-        expect(user.name).toBe('testuser');
-        expect(user.avatar).toBe('avatar.png');
-      }
-    )(result);
-  });
-
-  it('should handle user retrieval failure', async () => {
-    remoteDataSourceMock.getUser.mockResolvedValue(
-      left(new Error('Failed to get user'))
-    );
-
-    const result = await repository.getUser();
-
-    match(
-      (error: Error) => expect(error.message).toBe('Failed to get user'),
-      () => fail('Expected error but got success')
-    )(result);
+    const userId = repository.getUserId();
+    expect(userId).toBe('123');
+    expect(remoteDataSourceMock.getUserId).toHaveBeenCalled();
   });
 
   it('should check session status', (done) => {

@@ -4,4 +4,6 @@ export interface PostResponse {
   readonly content: string;
   readonly user_id: string;
   readonly user_email: string;
+  readonly avatar: string;
+  readonly display_name: string;
 }

@@ -7,6 +7,7 @@ import {
   SpinnerComponent,
 } from '@ng-sota/ui';
 import { FeedMainFacade } from './feed-main.facade';
+import { AuthUser } from '@ng-sota/auth-api';
 
 @Component({
   selector: 'lib-feed-main',
@@ -24,8 +25,10 @@ export class FeedMainComponent {
   errorMessage = computed(() => this.controller.errorMessage());
   isLoading = computed(() => this.controller.isLoading());
   posts = computed(() => this.controller.posts());
+  avatar = computed(() => this.controller.avatar());
 
   constructor(private controller: FeedMainFacade) {
+    this.controller.getUserAvatar();
     this.controller.getFeed();
   }
 
