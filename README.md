@@ -109,3 +109,10 @@ To run the docker image:
 ```sh
 docker run -d -p 5173:5173 --name ngsota-contianer ngsota
 ``` 
+
+## CI
+
+```sh
+npx nx run-many --target=lint --all
+npx nx run-many --target=test --all
+```
