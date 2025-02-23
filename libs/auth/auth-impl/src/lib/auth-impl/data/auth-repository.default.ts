@@ -3,7 +3,6 @@ import { Either } from 'fp-ts/Either';
 import { AuthRepository } from '../domain/repository/auth.repository';
 import { AuthRemoteDataSource } from './auth-remote.datasource';
 import { AuthUser } from '@ng-sota/auth-api';
-import { boolean, string } from 'fp-ts';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

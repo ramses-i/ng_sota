@@ -3,7 +3,6 @@ import { AuthService } from '@ng-sota/supabase';
 import { AuthRemoteDataSource } from '../auth-remote.datasource';
 import { Either, left, right } from 'fp-ts/Either';
 import { AuthError, AuthUser } from '@ng-sota/auth-api';
-import { boolean, string } from 'fp-ts';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
