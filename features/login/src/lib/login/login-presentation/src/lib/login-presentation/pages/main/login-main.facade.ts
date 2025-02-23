@@ -1,7 +1,7 @@
 import { Injectable, signal } from '@angular/core';
-import { LoginError, LoginUseCase } from '@ng-sota/login-domain';
 import { match } from 'fp-ts/Either';
 import { Router } from '@angular/router';
+import { AuthError, LoginUseCase } from '@ng-sota/auth-api';
 
 @Injectable({ providedIn: 'root' })
 export class LoginMainFacade {
@@ -17,7 +17,7 @@ export class LoginMainFacade {
     const result = await this.loginUseCase.execute(email, password);
 
     match(
-      (error: LoginError) => this.errorMessage.set(error.message),
+      (error: AuthError) => this.errorMessage.set(error.message),
       (isAuthorized: boolean) => {
         if (isAuthorized) {
           this.router.navigate(['/feed']);
