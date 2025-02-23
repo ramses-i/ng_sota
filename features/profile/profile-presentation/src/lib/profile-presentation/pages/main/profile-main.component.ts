@@ -23,4 +23,8 @@ export class ProfileMainComponent {
   constructor(private controller: ProfileMainFacade) {
     this.controller.getUserFeed();
   }
+
+  onPublishPost(postForm: { postBox: string }) {
+    this.controller.publishPost(postForm.postBox);
+  }
 }
