@@ -1,4 +1,4 @@
-import {Component, Output, EventEmitter, Input} from '@angular/core';
+import { Component, Output, EventEmitter, Input } from '@angular/core';
 import {
   FormBuilder,
   FormControl,
@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { FormFieldComponent } from '../../molecules/form-field/form-field.component';
 import { ButtonComponent } from '../../atoms/button/button.component';
-import {NgIf} from "@angular/common";
+import { NgIf } from '@angular/common';
 
 @Component({
   imports: [FormFieldComponent, ButtonComponent, ReactiveFormsModule, NgIf],

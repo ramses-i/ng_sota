@@ -4,10 +4,7 @@
   "sourceRoot": "libs/posts/posts-impl/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:posts",
-    "layer:impl"
-  ],
+  "tags": ["scope:posts", "layer:impl"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

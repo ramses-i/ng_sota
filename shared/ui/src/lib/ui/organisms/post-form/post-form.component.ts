@@ -13,16 +13,16 @@ import {
   imports: [TextAreaComponent, ButtonComponent, ReactiveFormsModule],
   selector: 'lib-post-form',
   template: `
-      <form [formGroup]="postForm" class="mb-6 px-4" (ngSubmit)="onSubmit()">
-          <lib-text-area-field
-                  id="postBox"
-                  [rows]="6"
-                  placeholder="Write a post..."
-                  [control]="postBoxControl"
-                  [error]="postBoxControl.invalid ? 'Empty posts are not allowed' : ''"
-          />
-          <lib-button label="Publish post"/>
-      </form>
+    <form [formGroup]="postForm" class="mb-6 px-4" (ngSubmit)="onSubmit()">
+      <lib-text-area-field
+        id="postBox"
+        [rows]="6"
+        placeholder="Write a post..."
+        [control]="postBoxControl"
+        [error]="postBoxControl.invalid ? 'Empty posts are not allowed' : ''"
+      />
+      <lib-button label="Publish post" />
+    </form>
   `,
 })
 export class PostFormComponent {

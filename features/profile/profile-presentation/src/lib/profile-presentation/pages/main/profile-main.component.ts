@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import {
   NavbarComponent,
   PostFormComponent,
-  PostListComponent, SpinnerComponent,
+  PostListComponent,
+  SpinnerComponent,
 } from '@ng-sota/ui';
 import { ProfileMainFacade } from './profile-main.facade';
 

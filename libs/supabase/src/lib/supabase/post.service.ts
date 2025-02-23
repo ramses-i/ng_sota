@@ -1,16 +1,11 @@
 import { Injectable } from '@angular/core';
 import { SupabaseClient } from '@supabase/supabase-js';
-import { supabase } from './supabase.config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostsService {
-  private supabase: SupabaseClient;
-
-  constructor() {
-    this.supabase = supabase;
-  }
+  constructor(private supabase: SupabaseClient) {}
 
   async getPosts() {
     return this.supabase.from('posts_with_users').select('*');

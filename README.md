@@ -4,7 +4,7 @@
 
 To see the project's module structure you can run:
 
-``` sh
+```sh
 npx nx graph
 ```
 
@@ -88,7 +88,7 @@ improves code autocompletion in your IDE. It is available for VSCode and Intelli
 
 Learn more:
 
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
+- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-standalone-tutorial?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
 - [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
@@ -105,14 +105,14 @@ And join the Nx community:
 To build the docker image of the project:
 
 ```sh
-docker build -t ngsota . --no-cache 
+docker build -t ngsota . --no-cache
 ```
 
 To run the docker image:
 
 ```sh
 docker run -d -p 5173:5173 --name ngsota-contianer ngsota
-``` 
+```
 
 ## CI
 

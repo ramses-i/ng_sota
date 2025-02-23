@@ -4,16 +4,11 @@
   "sourceRoot": "features/login/login-presentation/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:login",
-    "layer:presentation"
-  ],
+  "tags": ["scope:login", "layer:presentation"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "features/login/login-presentation/jest.config.ts"
       }

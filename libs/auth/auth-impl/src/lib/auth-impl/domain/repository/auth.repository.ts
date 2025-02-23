@@ -1,5 +1,4 @@
 import { Either } from 'fp-ts/Either';
-import { AuthUser } from '@ng-sota/auth-api';
 import { Observable } from 'rxjs';
 
 export abstract class AuthRepository {

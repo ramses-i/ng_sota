@@ -6,5 +6,8 @@ export abstract class PostsRemoteDataSource {
 
   abstract getPostsFromUser(userId: string): Promise<Either<Error, DPosts>>;
 
-  abstract createPost(userId: string, content: string): Promise<Either<Error, boolean>>;
+  abstract createPost(
+    userId: string,
+    content: string
+  ): Promise<Either<Error, boolean>>;
 }

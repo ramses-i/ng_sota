@@ -4,9 +4,7 @@
   "sourceRoot": "libs/supabase/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:supabase"
-  ],
+  "tags": ["scope:supabase"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

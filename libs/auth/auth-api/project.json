@@ -4,10 +4,7 @@
   "sourceRoot": "libs/auth/auth-api/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:auth",
-    "layer:api"
-  ],
+  "tags": ["scope:auth", "layer:api"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

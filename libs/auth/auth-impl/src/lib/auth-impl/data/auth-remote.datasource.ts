@@ -11,7 +11,7 @@ export abstract class AuthRemoteDataSource {
 
   abstract isAuthenticated(): boolean;
 
-  abstract getUserId():string;
+  abstract getUserId(): string;
 
   abstract checkSession(): Observable<boolean>;
 }

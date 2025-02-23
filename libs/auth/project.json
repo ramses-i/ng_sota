@@ -4,16 +4,11 @@
   "sourceRoot": "libs/auth/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:auth",
-    "layer:lib"
-  ],
+  "tags": ["scope:auth", "layer:lib"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "libs/auth/jest.config.ts"
       }

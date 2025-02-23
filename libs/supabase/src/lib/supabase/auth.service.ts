@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { supabase } from './supabase.config';
+import { SupabaseClient } from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private userSubject = new BehaviorSubject<any | null>(null);
   user$ = this.userSubject.asObservable();
 
-  constructor() {
+  constructor(private supabase: SupabaseClient) {
     this.checkSession();
     this.listenToAuthChanges();
   }
 
   async login(email: string, password: string) {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await this.supabase.auth.signInWithPassword({
       email,
       password,
     });
@@ -30,7 +30,7 @@ export class AuthService {
   }
 
   async logout() {
-    await supabase.auth.signOut();
+    await this.supabase.auth.signOut();
     this.userSubject.next(null);
   }
 
@@ -44,7 +44,7 @@ export class AuthService {
 
   checkSession(): Observable<boolean> {
     return new Observable<boolean>((observer) => {
-      supabase.auth
+      this.supabase.auth
         .getSession()
         .then(({ data }) => {
           if (data.session) {
@@ -62,7 +62,7 @@ export class AuthService {
   }
 
   private listenToAuthChanges() {
-    supabase.auth.onAuthStateChange((event, session) => {
+    this.supabase.auth.onAuthStateChange((event, session) => {
       console.log(
         'Auth change event:',
         event,

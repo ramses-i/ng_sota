@@ -4,16 +4,11 @@
   "sourceRoot": "features/feed/feed-presentation/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [
-    "scope:feed",
-    "layer:presentation"
-  ],
+  "tags": ["scope:feed", "layer:presentation"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",
-      "outputs": [
-        "{workspaceRoot}/coverage/{projectRoot}"
-      ],
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
         "jestConfig": "features/feed/feed-presentation/jest.config.ts"
       }
