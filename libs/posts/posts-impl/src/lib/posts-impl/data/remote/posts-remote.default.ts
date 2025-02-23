@@ -6,7 +6,7 @@ import { PostResponse } from './model/response/post.response';
 import { PostsResponseToDomain } from './mapper/post.mapper';
 import { PostsRemoteDataSource } from '../posts-remote.datasource';
 import { PostsError } from '@ng-sota/posts-api';
-import {DPosts} from "@ng-sota/posts-api";
+import { DPosts } from '@ng-sota/posts-api';
 
 @Injectable({ providedIn: 'root' })
 export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
@@ -35,10 +35,14 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
   ): Promise<Either<Error, DPosts>> {
     try {
       const result = await this.postsService.getPostsByUser(userId);
-      console.log(result);
-      return right({
-        items: [],
-      });
+
+      console.log('Raw Supabase Response: ', result);
+
+      if (result.error) {
+        return left(new PostsError(result.error.message));
+      }
+
+      return right(PostsResponseToDomain(result.data));
     } catch (error) {
       return left(new PostsError('getPostsFromUser Call Error 1'));
     }

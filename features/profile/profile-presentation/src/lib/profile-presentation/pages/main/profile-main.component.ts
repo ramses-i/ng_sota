@@ -28,5 +28,7 @@ import { ProfileMainFacade } from './profile-main.facade';
 export class ProfileMainComponent {
   posts = computed(() => this.controller.posts());
 
-  constructor(private controller: ProfileMainFacade) {}
+  constructor(private controller: ProfileMainFacade) {
+    this.controller.getUserFeed();
+  }
 }

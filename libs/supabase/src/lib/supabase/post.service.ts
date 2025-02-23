@@ -20,8 +20,8 @@ export class PostsService {
   async getPostsByUser(userId: string) {
     const user = userId.length == 0 ? this.authService.currentUserId() : userId;
     return this.supabase
-      .from('posts')
-      .select('*, auth.users(email)')
+      .from('posts_with_users')
+      .select('*')
       .eq('user_id', user);
   }
 

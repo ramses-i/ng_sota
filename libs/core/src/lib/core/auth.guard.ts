@@ -29,7 +29,11 @@ export class AuthGuard implements CanActivate {
           state.url
         );
 
-        if (isAuthenticated && state.url.startsWith('/auth')) {
+        if (
+          isAuthenticated &&
+          state.url.startsWith('/auth') &&
+          state.url !== '/auth/out'
+        ) {
           this.router.navigate(['/feed']);
           return false;
         }
