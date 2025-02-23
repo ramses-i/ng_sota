@@ -4,7 +4,7 @@ import {
   NavbarComponent,
   PostFormComponent,
   PostListComponent,
-}from '@ng-sota/ui';
+} from '@ng-sota/ui';
 import { FeedMainFacade } from './feed-main.facade';
 
 @Component({
@@ -23,5 +23,9 @@ export class FeedMainComponent {
 
   constructor(private controller: FeedMainFacade) {
     this.controller.getFeed();
+  }
+
+  onPublishPost(postForm: { postBox: string }) {
+    this.controller.publishPost(postForm.postBox);
   }
 }

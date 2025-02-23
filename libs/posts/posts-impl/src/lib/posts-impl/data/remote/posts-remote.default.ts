@@ -5,8 +5,7 @@ import { PostgrestResponse } from '@supabase/supabase-js';
 import { PostResponse } from './model/response/post.response';
 import { PostsResponseToDomain } from './mapper/post.mapper';
 import { PostsRemoteDataSource } from '../posts-remote.datasource';
-import { PostsError } from '@ng-sota/posts-api';
-import { DPosts } from '@ng-sota/posts-api';
+import { DPosts, PostsError } from '@ng-sota/posts-api';
 
 @Injectable({ providedIn: 'root' })
 export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
@@ -18,7 +17,6 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
     try {
       const result: PostgrestResponse<PostResponse> =
         await this.postsService.getPosts();
-      console.log('Raw Supabase Response: ', result);
 
       if (result.error) {
         return left(new PostsError(result.error.message));
@@ -36,8 +34,6 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
     try {
       const result = await this.postsService.getPostsByUser(userId);
 
-      console.log('Raw Supabase Response: ', result);
-
       if (result.error) {
         return left(new PostsError(result.error.message));
       }
@@ -50,11 +46,10 @@ export class PostsRemoteDataSourceDefault extends PostsRemoteDataSource {
 
   override async createPost(content: string): Promise<Either<Error, boolean>> {
     try {
-      const result = await this.postsService.createPost(content);
-      console.log(result);
+      await this.postsService.createPost(content);
       return right(true);
     } catch (error) {
-      return left(new PostsError('getPostsFromUser Call Error 1'));
+      return left(new PostsError('createPost Call Error 1'));
     }
   }
 }

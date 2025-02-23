@@ -26,14 +26,15 @@ export class PostsService {
   }
 
   async createPost(content: string) {
-    const title = 'Title';
     const userId = this.authService.currentUserId();
-    return this.supabase
-      .from('posts')
-      .insert([{ title, content, user_id: userId }]);
-  }
-
-  async deletePost(id: string) {
-    return this.supabase.from('posts').delete().eq('id', id);
+    return this.supabase.from('posts').insert([
+      {
+        content: content,
+        user_id: userId,
+        device: 'Web',
+        location: 'Location',
+        tou_compliant: true,
+      },
+    ]);
   }
 }

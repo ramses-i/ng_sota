@@ -63,7 +63,7 @@ export class AuthService {
 
   private listenToAuthChanges() {
     supabase.auth.onAuthStateChange((event, session) => {
-      console.log('Auth change event:', event, 'Session:', session);
+      console.log('Auth change event:', event, 'Session null?:', session != null);
       this.userSubject.next(session?.user ?? null);
     });
   }
