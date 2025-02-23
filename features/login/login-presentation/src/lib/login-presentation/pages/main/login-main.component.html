@@ -6,7 +6,7 @@
         Sign in to your account
       </h1>
       <br />
-      <lib-login-form (login)="onLogin($event)" />
+      <lib-login-form (login)="onLogin($event)" [error]="error() ? 'Invalid credentials' : ''" />
     </div>
   </div>
 </section>
