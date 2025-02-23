@@ -1,6 +1,11 @@
 import { TestBed } from '@angular/core/testing';
 import { FeedMainFacade } from './feed-main.facade';
-import { CreatePostUseCase, DPosts, GetPostsUseCase } from '@ng-sota/posts-api';
+import {
+  CreatePostUseCase,
+  DPosts,
+  GetPostsUseCase,
+  PostsError,
+} from '@ng-sota/posts-api';
 import { left, right } from 'fp-ts/Either';
 
 describe('FeedMainFacade', () => {
@@ -12,9 +17,11 @@ describe('FeedMainFacade', () => {
     items: [
       {
         id: '1',
-        userId: '123',
-        content: 'Post de prueba',
         createdAt: '2024-02-23T10:00:00Z',
+        content: 'Post de prueba',
+        userId: '123',
+        userAvatar: 'https://example.com/avatar.png',
+        userName: 'Test User',
       },
     ],
   };
@@ -23,6 +30,7 @@ describe('FeedMainFacade', () => {
     getPostsMock = {
       execute: jest.fn(),
     } as unknown as jest.Mocked<GetPostsUseCase>;
+
     createPostMock = {
       execute: jest.fn(),
     } as unknown as jest.Mocked<CreatePostUseCase>;
@@ -39,7 +47,7 @@ describe('FeedMainFacade', () => {
   });
 
   describe('getFeed', () => {
-    it('debería cargar posts correctamente', async () => {
+    it('should load posts successfully', async () => {
       getPostsMock.execute.mockResolvedValue(right(mockDPosts));
 
       await facade.getFeed();
@@ -47,24 +55,29 @@ describe('FeedMainFacade', () => {
       expect(facade.isLoading()).toBe(false);
       expect(facade.errorMessage()).toBeNull();
       expect(facade.posts().items.length).toBe(1);
-      expect(facade.posts().items[0].content).toBe('Post de prueba');
+      const post = facade.posts().items[0];
+      expect(post.id).toBe('1');
+      expect(post.content).toBe('Post de prueba');
+      expect(post.user.avatar).toBe('https://example.com/avatar.png');
+      expect(post.user.name).toBe('Test User');
+      expect(getPostsMock.execute).toHaveBeenCalled();
     });
 
-    it('debería manejar errores al obtener posts', async () => {
+    it('should handle error when loading posts', async () => {
       getPostsMock.execute.mockResolvedValue(
-        left(new Error('Error al cargar posts'))
+        left(new PostsError('Failed to load posts'))
       );
 
       await facade.getFeed();
 
       expect(facade.isLoading()).toBe(false);
-      expect(facade.errorMessage()).toBe('Error al cargar posts');
+      expect(facade.errorMessage()).toBe('Failed to load posts');
       expect(facade.posts().items.length).toBe(0);
     });
   });
 
   describe('publishPost', () => {
-    it('debería publicar un post y recargar el feed', async () => {
+    it('should publish a post successfully and reload feed', async () => {
       createPostMock.execute.mockResolvedValue(right(true));
       getPostsMock.execute.mockResolvedValue(right(mockDPosts));
 
@@ -75,17 +88,17 @@ describe('FeedMainFacade', () => {
       expect(facade.posts().items.length).toBe(1);
     });
 
-    it('debería manejar error al publicar un post', async () => {
+    it('should handle error when publishing post', async () => {
       createPostMock.execute.mockResolvedValue(
-        left(new Error('Error al publicar post'))
+        left(new PostsError('Failed to create post'))
       );
 
       await facade.publishPost('Nuevo post');
 
-      expect(facade.errorMessage()).toBe('Error al publicar post');
+      expect(facade.errorMessage()).toBe('Failed to create post');
     });
 
-    it('debería mostrar mensaje si no se puede crear el post', async () => {
+    it('should show message if post creation fails', async () => {
       createPostMock.execute.mockResolvedValue(right(false));
 
       await facade.publishPost('Nuevo post');
@@ -93,6 +106,12 @@ describe('FeedMainFacade', () => {
       expect(facade.errorMessage()).toBe(
         'Could not create post, please try again later.'
       );
+    });
+  });
+
+  describe('avatar signal', () => {
+    it('should have default avatar', () => {
+      expect(facade.avatar()).toBe('https://i.pravatar.cc/300');
     });
   });
 });

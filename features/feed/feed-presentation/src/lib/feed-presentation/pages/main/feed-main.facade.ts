@@ -21,10 +21,6 @@ export class FeedMainFacade {
     private createPost: CreatePostUseCase
   ) {}
 
-  async getUserAvatar() {
-    // TODO: Create profile-api , profile-impl and GetCurrentUser
-  }
-
   async getFeed() {
     this.isLoading.set(true);
     this.errorMessage.set(null);
