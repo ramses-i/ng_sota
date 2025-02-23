@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { SupabaseClient } from '@supabase/supabase-js';
+import { User } from '@supabase/supabase-js';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private userSubject = new BehaviorSubject<any | null>(null);
-  user$ = this.userSubject.asObservable();
+  private userSubject = new BehaviorSubject<User | null>(null);
 
   constructor(private supabase: SupabaseClient) {
     this.checkSession();
@@ -23,7 +23,7 @@ export class AuthService {
     }
 
     if (data.user) {
-      this.userSubject.next({ id: data.user.id, email: data.user.email });
+      this.userSubject.next(data.user);
     } else {
       throw new Error('No se recibió usuario en la respuesta de Supabase');
     }
@@ -39,7 +39,7 @@ export class AuthService {
   }
 
   currentUserId(): string {
-    return this.userSubject.value.id;
+    return this.userSubject.value?.id ?? '';
   }
 
   checkSession(): Observable<boolean> {

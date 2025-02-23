@@ -23,19 +23,6 @@ describe('PostsRemoteDataSourceDefault', () => {
     },
   ];
 
-  const mockDPosts: DPosts = {
-    items: [
-      {
-        id: '1',
-        userId: '123',
-        userAvatar: 'https://example.com/avatar.png',
-        userName: 'Test User',
-        content: 'Post de prueba',
-        createdAt: '2024-02-23T10:00:00Z',
-      },
-    ],
-  };
-
   beforeEach(() => {
     postsServiceMock = {
       getPosts: jest.fn(),
