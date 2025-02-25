@@ -34,10 +34,23 @@ const meta: Meta<NavbarComponent> = {
       ],
     }),
   ],
+  args: {
+    avatar: 'https://i.pravatar.cc/150',
+  },
+  argTypes: {
+    avatar: {
+      control: 'text',
+      description: 'URL de la imagen para el avatar',
+    },
+  },
   tags: ['autodocs'],
 };
 
 export default meta;
 type Story = StoryObj<NavbarComponent>;
 
-export const Default: Story = {};
+export const Default: Story = {
+  args: {
+    avatar: 'https://i.pravatar.cc/150',
+  },
+};
