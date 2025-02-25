@@ -12,7 +12,7 @@ const meta: Meta<FeedTemplateComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
-        RouterModule.forChild([]), // Usamos forChild() para evitar duplicaciones
+        RouterModule.forChild([]),
         NavbarComponent,
         PostFormComponent,
         PostListComponent,
@@ -21,14 +21,14 @@ const meta: Meta<FeedTemplateComponent> = {
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({}), // Mock de params vacíos
-            queryParams: of({}), // Mock de queryParams vacíos
+            params: of({}),
+            queryParams: of({}),
             snapshot: {
               paramMap: {
-                get: () => null, // Devuelve null para cualquier parámetro
+                get: () => null,
               },
               queryParamMap: {
-                get: () => null, // Devuelve null para cualquier queryParam
+                get: () => null,
               },
             },
           },

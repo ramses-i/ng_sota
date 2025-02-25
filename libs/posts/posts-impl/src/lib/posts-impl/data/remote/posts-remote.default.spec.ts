@@ -178,7 +178,6 @@ describe('PostsRemoteDataSourceDefault', () => {
     });
   });
 
-  // Test para createPost
   describe('createPost', () => {
     it('should create a post successfully', async () => {
       const mockResponse: PostgrestResponse<PostResponse> = {

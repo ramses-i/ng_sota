@@ -11,7 +11,7 @@ const meta: Meta<NavbarComponent> = {
   decorators: [
     moduleMetadata({
       imports: [
-        RouterModule.forChild([]), // Usamos forChild() para evitar duplicaciones
+        RouterModule.forChild([]),
         UserProfileButtonComponent,
         NavItemComponent,
       ],
@@ -19,14 +19,14 @@ const meta: Meta<NavbarComponent> = {
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({}), // Mock de params vacíos
-            queryParams: of({}), // Mock de queryParams vacíos
+            params: of({}),
+            queryParams: of({}),
             snapshot: {
               paramMap: {
-                get: () => null, // Devuelve null para cualquier parámetro
+                get: () => null,
               },
               queryParamMap: {
-                get: () => null, // Devuelve null para cualquier queryParam
+                get: () => null,
               },
             },
           },

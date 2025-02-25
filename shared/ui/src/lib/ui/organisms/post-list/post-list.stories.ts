@@ -28,15 +28,23 @@ export const Default: Story = {
       items: [
         {
           id: '1',
-          createdAt: '2025-02-16T23:10:50.336217+00:00',
+          publishDate: '2025-02-16T23:10:50.336217+00:00',
           content: 'Este es un post de prueba con contenido ficticio.',
-          userId: '66e72be7-cbed-4f90-81eb-8ef0ca074a71',
+          user: {
+            id: '1',
+            name: 'User',
+            avatar: 'https://i.pravatar.cc/300',
+          },
         },
         {
           id: '2',
-          createdAt: '2025-02-16T23:52:38.095572+00:00',
+          publishDate: '2025-02-16T23:52:38.095572+00:00',
           content: 'Probando la nueva sintaxis de @for en Angular 19.',
-          userId: '57ee09a9-0588-4abb-9fe7-93778e945693',
+          user: {
+            id: '1',
+            name: 'User',
+            avatar: 'https://i.pravatar.cc/300',
+          },
         },
       ],
     },

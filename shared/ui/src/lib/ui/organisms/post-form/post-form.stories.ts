@@ -8,7 +8,7 @@ const meta: Meta<PostFormComponent> = {
   component: PostFormComponent,
   decorators: [
     moduleMetadata({
-      imports: [TextAreaComponent, ButtonComponent], // Importa los componentes internos
+      imports: [TextAreaComponent, ButtonComponent],
     }),
   ],
   tags: ['autodocs'],

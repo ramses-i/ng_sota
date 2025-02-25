@@ -7,7 +7,7 @@ const meta: Meta<PostComponent> = {
   component: PostComponent,
   decorators: [
     moduleMetadata({
-      imports: [AvatarComponent], // Importa AvatarComponent porque se usa dentro de PostComponent
+      imports: [AvatarComponent],
     }),
   ],
   tags: ['autodocs'],

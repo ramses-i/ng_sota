@@ -9,19 +9,19 @@ const meta: Meta<NavItemComponent> = {
   component: NavItemComponent,
   decorators: [
     moduleMetadata({
-      imports: [RouterModule.forChild([]), LinkComponent], // Usamos forChild() para evitar duplicación
+      imports: [RouterModule.forChild([]), LinkComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({}), // Mock de params vacíos
-            queryParams: of({}), // Mock de queryParams vacíos
+            params: of({}),
+            queryParams: of({}),
             snapshot: {
               paramMap: {
-                get: () => null, // Devuelve null para cualquier parámetro
+                get: () => null,
               },
               queryParamMap: {
-                get: () => null, // Devuelve null para cualquier queryParam
+                get: () => null,
               },
             },
           },

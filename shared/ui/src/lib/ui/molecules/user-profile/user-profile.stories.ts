@@ -9,19 +9,19 @@ const meta: Meta<UserProfileButtonComponent> = {
   component: UserProfileButtonComponent,
   decorators: [
     moduleMetadata({
-      imports: [RouterModule.forChild([]), AvatarComponent], // Usamos forChild() para evitar duplicación
+      imports: [RouterModule.forChild([]), AvatarComponent],
       providers: [
         {
           provide: ActivatedRoute,
           useValue: {
-            params: of({}), // Mock de params vacíos
-            queryParams: of({}), // Mock de queryParams vacíos
+            params: of({}),
+            queryParams: of({}),
             snapshot: {
               paramMap: {
-                get: () => null, // Devuelve null para cualquier parámetro
+                get: () => null,
               },
               queryParamMap: {
-                get: () => null, // Devuelve null para cualquier queryParam
+                get: () => null,
               },
             },
           },
