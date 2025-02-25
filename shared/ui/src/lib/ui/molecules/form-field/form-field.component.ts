@@ -14,7 +14,7 @@ import { NgIf } from '@angular/common';
       [placeholder]="placeholder"
       [control]="control"
     ></lib-input-field>
-    <p *ngIf="controlInvalid" class="text-red-500">
+    <p id="errorLibFormField" *ngIf="controlInvalid" class="text-red-500">
       {{ error }}
     </p>
   `,
