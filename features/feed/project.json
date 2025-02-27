@@ -4,7 +4,7 @@
   "sourceRoot": "features/feed/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["scope:feed", "layer:lib"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

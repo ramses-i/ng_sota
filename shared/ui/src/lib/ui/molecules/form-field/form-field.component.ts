@@ -6,7 +6,18 @@ import { NgIf } from '@angular/common';
 @Component({
   imports: [InputFieldComponent, NgIf],
   selector: 'lib-form-field',
-  templateUrl: './form-field.compoment.html',
+  template: `
+    <lib-input-field
+      [label]="label"
+      [id]="id"
+      [type]="type"
+      [placeholder]="placeholder"
+      [control]="control"
+    ></lib-input-field>
+    <p *ngIf="controlInvalid" class="text-red-500">
+      {{ error }}
+    </p>
+  `,
 })
 export class FormFieldComponent {
   @Input() label!: string;

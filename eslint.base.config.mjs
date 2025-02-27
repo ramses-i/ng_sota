@@ -23,14 +23,18 @@ export default [
             {
               sourceTag: 'layer:presentation',
               onlyDependOnLibsWithTags: [
+                'layer:presentation',
                 'layer:domain',
-                'scope:shared',
-                'scope:core',
+                'layer:api',
               ],
             },
             {
               sourceTag: 'layer:data',
-              onlyDependOnLibsWithTags: ['layer:domain', 'scope:core'],
+              onlyDependOnLibsWithTags: [
+                'layer:domain',
+                'scope:core',
+                'scope:supabase',
+              ],
             },
           ],
         },
@@ -50,7 +54,7 @@ export default [
     ],
     // Override or add rules here
     rules: {
-      "@typescript-eslint/no-inferrable-types": "off",
+      '@typescript-eslint/no-inferrable-types': 'off',
     },
   },
 ];

@@ -4,7 +4,7 @@
   "sourceRoot": "features/login/src",
   "prefix": "lib",
   "projectType": "library",
-  "tags": [],
+  "tags": ["scope:login", "layer:lib"],
   "targets": {
     "test": {
       "executor": "@nx/jest:jest",

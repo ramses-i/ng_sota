@@ -1,0 +1,20 @@
+{
+  "name": "posts-impl",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/posts/posts-impl/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": ["scope:posts", "layer:impl"],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/posts/posts-impl/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

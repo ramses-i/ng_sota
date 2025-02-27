@@ -1,0 +1,31 @@
+<form
+  [formGroup]="loginForm"
+  class="space-y-4 md:space-y-6"
+  (ngSubmit)="onSubmit()"
+>
+  <lib-form-field
+    label="Your email"
+    id="email"
+    type="email"
+    placeholder="name@company.com"
+    [control]="emailControl"
+    [error]="emailControl.invalid ? 'Invalid email' : ''"
+  >
+    >
+  </lib-form-field>
+  <br />
+  <lib-form-field
+    label="Password"
+    id="password"
+    type="password"
+    placeholder="••••••••"
+    [control]="passwordControl"
+    [error]="passwordControl.invalid ? 'Password required' : ''"
+  >
+  </lib-form-field>
+  <br />
+  <lib-button label="Sign in"></lib-button>
+  <p *ngIf="error" class="text-red-500 text-center">
+    {{ error }}
+  </p>
+</form>
