@@ -32,6 +32,8 @@
       "@ng-sota/posts-impl": ["libs/posts/posts-impl/src/index.ts"],
       "@ng-sota/posts-ui": ["libs/posts/posts-ui/src/index.ts"],
       "@ng-sota/profile": ["features/profile/src/index.ts"],
+      "@ng-sota/profile-api": ["features/profile/profile-api/src/index.ts"],
+      "@ng-sota/profile-impl": ["features/profile/profile-impl/src/index.ts"],
       "@ng-sota/profile-presentation": [
         "features/profile/profile-presentation/src/index.ts"
       ],

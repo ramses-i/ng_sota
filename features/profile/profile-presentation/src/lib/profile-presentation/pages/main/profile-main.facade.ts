@@ -8,6 +8,7 @@ import {
 } from '@ng-sota/posts-api';
 import { match } from 'fp-ts/Either';
 import { DPostsToPosts } from '@ng-sota/posts-ui';
+import {GetProfileAvatarUseCase, ProfileError} from "@ng-sota/profile-api";
 
 @Injectable({ providedIn: 'root' })
 export class ProfileMainFacade {
@@ -18,11 +19,20 @@ export class ProfileMainFacade {
 
   constructor(
     private getUserPosts: GetUserPostsUseCase,
-    private createPost: CreatePostUseCase
+    private createPost: CreatePostUseCase,
+    private getAvatar: GetProfileAvatarUseCase
   ) {}
 
   async getUserAvatar() {
-    // TODO: Create profile-api , profile-impl and GetCurrentUser
+    const result = await this.getAvatar.execute();
+
+    match(
+        (error: ProfileError) => this.errorMessage.set(error.message),
+        (avatar: string) => {
+          console.log(avatar);
+          this.avatar.set(avatar)
+        }
+    )(result);
   }
 
   async getUserFeed() {

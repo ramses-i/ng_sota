@@ -7,7 +7,7 @@ import { SupabaseClient } from '@supabase/supabase-js';
 export class ProfileService {
   constructor(private supabase: SupabaseClient) {}
 
-  async getProfile(userId: string) {
-    return this.supabase.from('profile').select('*').eq('user_id', userId);
+  async getAvatar(userId: string) {
+    return this.supabase.from('profile').select('avatar').eq('user_id', userId);
   }
 }

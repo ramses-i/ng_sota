@@ -1,0 +1,25 @@
+{
+  "name": "profile-impl",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "features/profile/profile-impl/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [
+    "scope:profile",
+    "layer:impl"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "features/profile/profile-impl/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}

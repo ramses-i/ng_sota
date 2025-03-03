@@ -26,6 +26,7 @@ export class ProfileMainComponent {
   avatar = computed(() => this.controller.avatar());
 
   constructor(private controller: ProfileMainFacade) {
+    this.controller.getUserAvatar()
     this.controller.getUserFeed();
   }
 

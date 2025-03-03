@@ -5,6 +5,7 @@ import { postDependencies } from '@ng-sota/posts';
 import { authDependencies } from '@ng-sota/auth';
 import { SupabaseClient } from '@supabase/supabase-js';
 import { supabase } from '@ng-sota/supabase';
+import { profileDependencies } from '@ng-sota/profile-impl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -13,5 +14,6 @@ export const appConfig: ApplicationConfig = {
     { provide: SupabaseClient, useValue: supabase },
     authDependencies,
     postDependencies,
+    profileDependencies,
   ],
 };

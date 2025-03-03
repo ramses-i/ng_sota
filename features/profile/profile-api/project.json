@@ -1,0 +1,25 @@
+{
+  "name": "profile-api",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "features/profile/profile-api/src",
+  "prefix": "lib",
+  "projectType": "library",
+  "tags": [
+    "scope:profile",
+    "layer:api"
+  ],
+  "targets": {
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "features/profile/profile-api/jest.config.ts"
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint"
+    }
+  }
+}
